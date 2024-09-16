@@ -641,7 +641,96 @@
       "desc": "",
       "priceLowest": "15.00",
       "priceHighest": "40.00",
-      "category": "cse"
+      "category": "edt"
+    },
+
+    {
+      "id": "mtp-1",
+      "title": "Scotchies Jerk Centre, Montego Bay",
+      "desc": "",
+      "priceLowest": "10.00",
+      "priceHighest": "35.00",
+      "category": "edt"
+    },
+    {
+      "id": "cse-2",
+      "title": "Mosino Gaming Bar and Grill Montego Bay",
+      "desc": "",
+      "priceLowest": "12.50",
+      "priceHighest": "40.00",
+      "category": "edt"
+    },
+    {
+      "id": "cse-3",
+      "title": "Mystic Thai, Indian and Thai Cuisine Montego Bay",
+      "desc": "",
+      "priceLowest": "12.50",
+      "priceHighest": "40.00",
+      "category": "edt"
+    },
+    {
+      "id": "cse-4",
+      "title": "Jerky’s Bar & Grill, Jamaican Restaurant Montego Bay",
+      "desc": "",
+      "priceLowest": "12.50",
+      "priceHighest": "40.00",
+      "category": "edt"
+    },
+    {
+      "id": "cse-5",
+      "title": "Usain Bolt’s Tracks and Records Restaurant, St. James Plaza, Gloucester Ave, Montego Bay, Jamaica",
+      "desc": "",
+      "priceLowest": "12.50",
+      "priceHighest": "40.00",
+      "category": "edt"
+    },
+    {
+      "id": "cse-6",
+      "title": "Peppa’s Cool Spot, Bar & Grill Montego Bay",
+      "desc": "",
+      "priceLowest": "12.50",
+      "priceHighest": "40.00",
+      "category": "edt"
+    },
+    {
+      "id": "cse-7",
+      "title": "The Pelican Grill, Jamaican Restaurant",
+      "desc": "",
+      "priceLowest": "12.50",
+      "priceHighest": "40.00",
+      "category": "edt"
+    },
+    {
+      "id": "cse-8",
+      "title": "Jimmy Buffett’s Margaritaville, Restaurant, Bar and Night Life, Montego Bay",
+      "desc": "",
+      "priceLowest": "10.00",
+      "priceHighest": "35.00",
+      "category": "edt"
+    },
+    {
+      "id": "cse-9",
+      "title": "Pork Pit Bar & Grill Gloucester Ave Montego Bay",
+      "desc": "",
+      "priceLowest": "10.00",
+      "priceHighest": "35.00",
+      "category": "edt"
+    },
+    {
+      "id": "cse-10",
+      "title": "House Boat Grill Restaurant, Seafood Restaurant Montego Bay ",
+      "desc": "",
+      "priceLowest": "10.00",
+      "priceHighest": "35.00",
+      "category": "edt"
+    },
+    {
+      "id": "cse-11",
+      "title": "Pier One, Seafood Restaurant Bar and Night Life Montego Bay",
+      "desc": "",
+      "priceLowest": "15.00",
+      "priceHighest": "40.00",
+      "category": "edt"
     }
   ]
 }

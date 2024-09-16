@@ -763,6 +763,39 @@
       "priceLowest": "12.50",
       "priceHighest": "40.00",
       "category": "edt"
+    },
+
+    {
+      "id": "cse-8",
+      "title": "Jimmy Buffett’s Margaritaville, Restaurant, Bar and Night Life, Montego Bay",
+      "desc": "",
+      "priceLowest": "10.00",
+      "priceHighest": "35.00",
+      "category": "ncb"
+    },
+    {
+      "id": "cse-2",
+      "title": "Mosino Gaming Bar and Grill Montego Bay",
+      "desc": "",
+      "priceLowest": "12.50",
+      "priceHighest": "40.00",
+      "category": "ncb"
+    },
+    {
+      "id": "cse-1",
+      "title": "Coral Cliff Gaming Lounge Hip Strip Montego Bay",
+      "desc": "",
+      "priceLowest": "12.50",
+      "priceHighest": "40.00",
+      "category": "ncb"
+    },
+    {
+      "id": "cse-11",
+      "title": "Pier One, Seafood Restaurant Bar and Night Life Montego Bay",
+      "desc": "",
+      "priceLowest": "15.00",
+      "priceHighest": "40.00",
+      "category": "ncb"
     }
   ]
 }

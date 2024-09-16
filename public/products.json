@@ -200,6 +200,207 @@
       "priceLowest": "30.00",
       "priceHighest": "60.00",
       "category": "mpt"
+    },
+
+    {
+      "id": "ctp-1",
+      "title": "Pelican Bar, Black River Safari & Ys Falls Combo Tour Package",
+      "desc": "",
+      "priceLowest": "70.00",
+      "priceHighest": "90.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-2",
+      "title": "Black River Safari, YS Falls & Appleton Rum Factory Combo Tour Package",
+      "desc": "",
+      "priceLowest": "70.00",
+      "priceHighest": "95.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-3",
+      "title": "Pelican Bar & Ys Falls Combo Tour Package",
+      "desc": "",
+      "priceLowest": "63.00",
+      "priceHighest": "90.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-4",
+      "title": "Blue Hole Ocho Rios & Bob Marley Nine Miles St. Ann Combo Tour Package",
+      "desc": "",
+      "priceLowest": "63.00",
+      "priceHighest": "95.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-5",
+      "title": "Pelican Bar & Appleton Rum Tour Combo Tour Package",
+      "desc": "",
+      "priceLowest": "50.00",
+      "priceHighest": "80.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-6",
+      "title": "Black River Safari & Pelican Bar Combo Tour Package",
+      "desc": "",
+      "priceLowest": "50.00",
+      "priceHighest": "90.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-7",
+      "title": "Black River Safari & Appleton Rum Factory Combo Tour Package",
+      "desc": "",
+      "priceLowest": "50.00",
+      "priceHighest": "85.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-8",
+      "title": "YS Falls & Appleton Rum Factory Combo Tour Package ",
+      "desc": "",
+      "priceLowest": "50.00",
+      "priceHighest": "90.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-9",
+      "title": "Black River Safari & YS Falls Combo Tour Package",
+      "desc": "",
+      "priceLowest": "50.00",
+      "priceHighest": "125.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-10",
+      "title": "Blue Hole Ocho Rios & Martha Brea River Rafting Combo Tour Package ",
+      "desc": "",
+      "priceLowest": "50.00",
+      "priceHighest": "95.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-11",
+      "title": "Bob Marley Nine Miles & Dunn’s River Falls Combo Tour Package",
+      "desc": "",
+      "priceLowest": "50.00",
+      "priceHighest": "100.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-12",
+      "title": "Dunn’s River Falls & Luminous Lagoon Combo Tour Package",
+      "desc": "",
+      "priceLowest": "43.00",
+      "priceHighest": "75.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-13",
+      "title": "Bob Marley Nine Miles & Marthe Brae River Rafting Combo Tour Package",
+      "desc": "",
+      "priceLowest": "47.50",
+      "priceHighest": "90.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-14",
+      "title": "Dunn’s River Falls & Martha Brae River Rafting Combo Tour Package",
+      "desc": "",
+      "priceLowest": "43.00",
+      "priceHighest": "75.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-15",
+      "title": "Ricks Cafe, Zipline & ATV Negril Combo Tour Package",
+      "desc": "",
+      "priceLowest": "40.00",
+      "priceHighest": "80.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-16",
+      "title": "Zipline , ATV & Horseback Riding Negril Combo Tour Package",
+      "desc": "",
+      "priceLowest": "30.00",
+      "priceHighest": "75.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-17",
+      "title": "Rose Hall Great House & Martha Brea River Rafting Combo Tour Package",
+      "desc": "",
+      "priceLowest": "30.00",
+      "priceHighest": "60.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-18",
+      "title": "Rose Hall Great House & Luminous Lagoon Combo Tour Package",
+      "desc": "",
+      "priceLowest": "30.00",
+      "priceHighest": "60.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-19",
+      "title": "Dunn’s River Falls & Dolphin Cove Ocho Rios",
+      "desc": "",
+      "priceLowest": "30.00",
+      "priceHighest": "75.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-20",
+      "title": "ATV/Dune Buggy, Blue Hole Secret Falls and Bamboo Rafting Ocho Rios ",
+      "desc": "",
+      "priceLowest": "25.00",
+      "priceHighest": "70.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-21",
+      "title": "Zipline , ATV & Horseback Riding Chukka Adventure Sandy Bay Jamaica Combo Tour Package",
+      "desc": "",
+      "priceLowest": "20.00",
+      "priceHighest": "60.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-22",
+      "title": "Martha Brea River Rafting & Luminous Lagoon Combo Tour Package",
+      "desc": "",
+      "priceLowest": "20.00",
+      "priceHighest": "50.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-23",
+      "title": "Rick’s Cafe & Shopping Tour Negril ",
+      "desc": "",
+      "priceLowest": "15.00",
+      "priceHighest": "20.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-24",
+      "title": "Dunn’s River Falls & Horseback Riding, Ocho Rios, Jamaica",
+      "desc": "",
+      "priceLowest": "15.00",
+      "priceHighest": "75.00",
+      "category": "ctp"
+    },
+    {
+      "id": "ctp-25",
+      "title": "Seven Mile Beach & Rick’s Cafe Negril",
+      "desc": "",
+      "priceLowest": "20.00",
+      "priceHighest": "72.50",
+      "category": "ctp"
     }
   ]
 }

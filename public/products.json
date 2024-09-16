@@ -731,6 +731,38 @@
       "priceLowest": "15.00",
       "priceHighest": "40.00",
       "category": "edt"
+    },
+    {
+      "id": "egt-1",
+      "title": "Tryall Golf Club Hanover",
+      "desc": "",
+      "priceLowest": "20.00",
+      "priceHighest": "65.00",
+      "category": "edt"
+    },
+    {
+      "id": "egt-2",
+      "title": "White Witch Golf Course Montego Bay",
+      "desc": "",
+      "priceLowest": "12.50",
+      "priceHighest": "40.00",
+      "category": "edt"
+    },
+    {
+      "id": "egt-3",
+      "title": "Half Moon Golf Club Montego Bay",
+      "desc": "",
+      "priceLowest": "12.50",
+      "priceHighest": "40.00",
+      "category": "edt"
+    },
+    {
+      "id": "egt-4",
+      "title": "Cinnamon Hill Golf Course at Rose Hall Montego Bay",
+      "desc": "",
+      "priceLowest": "12.50",
+      "priceHighest": "40.00",
+      "category": "edt"
     }
   ]
 }

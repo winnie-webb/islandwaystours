@@ -796,6 +796,46 @@
       "priceLowest": "15.00",
       "priceHighest": "40.00",
       "category": "ncb"
+    },
+    {
+      "id": "st-1",
+      "title": "Montego Bay Shopping & City Tour",
+      "desc": "",
+      "priceLowest": "20.00",
+      "priceHighest": "30.00",
+      "category": "st"
+    },
+    {
+      "id": "st-2",
+      "title": "Hip Strip & Craft Market Shopping Tour Montego Bay",
+      "desc": "",
+      "priceLowest": "20.00",
+      "priceHighest": "30.00",
+      "category": "st"
+    },
+    {
+      "id": "st-3",
+      "title": "Rick’s Cafe & Shopping Tour Negril ",
+      "desc": "",
+      "priceLowest": "15.00",
+      "priceHighest": "20.00",
+      "category": "st"
+    },
+    {
+      "id": "st-4",
+      "title": "Malls & Craft Market Shopping Tour Ocho Rios",
+      "desc": "",
+      "priceLowest": "15.00",
+      "priceHighest": "40.00",
+      "category": "st"
+    },
+    {
+      "id": "st-5",
+      "title": "Whitter Village Shopping Mall Tour",
+      "desc": "",
+      "priceLowest": "10.00",
+      "priceHighest": "20.00",
+      "category": "st"
     }
   ]
 }

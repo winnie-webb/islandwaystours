@@ -6,7 +6,7 @@
       "desc": "",
       "priceLowest": "75.00",
       "priceHighest": "125.00",
-      "category": "airport-transfer"
+      "category": "at"
     },
     {
       "id": "at-2",
@@ -14,7 +14,7 @@
       "desc": "",
       "priceLowest": "50.00",
       "priceHighest": "160.00",
-      "category": "airport-transfer"
+      "category": "at"
     },
     {
       "id": "at-3",
@@ -22,7 +22,7 @@
       "desc": "",
       "priceLowest": "40.00",
       "priceHighest": "75.00",
-      "category": "airport-transfer"
+      "category": "at"
     },
     {
       "id": "at-4",
@@ -30,7 +30,7 @@
       "desc": "",
       "priceLowest": "25.00",
       "priceHighest": "50.00",
-      "category": "airport-transfer"
+      "category": "at"
     },
     {
       "id": "at-5",
@@ -38,7 +38,7 @@
       "desc": "",
       "priceLowest": "24.00",
       "priceHighest": "56.00",
-      "category": "airport-transfer"
+      "category": "at"
     },
     {
       "id": "at-6",
@@ -46,7 +46,7 @@
       "desc": "",
       "priceLowest": "22.00",
       "priceHighest": "44.00",
-      "category": "airport-transfer"
+      "category": "at"
     },
     {
       "id": "at-7",
@@ -54,7 +54,7 @@
       "desc": "",
       "priceLowest": "20.00",
       "priceHighest": "180.00",
-      "category": "airport-transfer"
+      "category": "at"
     },
     {
       "id": "at-8",
@@ -62,7 +62,7 @@
       "desc": "",
       "priceLowest": "18.00",
       "priceHighest": "36.00",
-      "category": "airport-transfer"
+      "category": "at"
     },
     {
       "id": "at-9",
@@ -70,7 +70,7 @@
       "desc": "",
       "priceLowest": "16.00",
       "priceHighest": "33.00",
-      "category": "airport-transfer"
+      "category": "at"
     },
     {
       "id": "at-10",
@@ -78,7 +78,7 @@
       "desc": "",
       "priceLowest": "15.00",
       "priceHighest": "30.00",
-      "category": "airport-transfer"
+      "category": "at"
     },
     {
       "id": "at-11",
@@ -86,7 +86,7 @@
       "desc": "",
       "priceLowest": "15.00",
       "priceHighest": "33.00",
-      "category": "airport-transfer"
+      "category": "at"
     },
     {
       "id": "at-12",
@@ -94,7 +94,7 @@
       "desc": "",
       "priceLowest": "5.00",
       "priceHighest": "30.00",
-      "category": "airport-transfer"
+      "category": "at"
     },
 
     {

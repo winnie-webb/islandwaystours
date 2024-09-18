@@ -674,7 +674,7 @@ export const products = {
     },
 
     {
-      id: "mtp-1",
+      id: "mpt-1",
       title: "Scotchies Jerk Centre, Montego Bay",
       desc: "",
       priceLowest: "10.00",

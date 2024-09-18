@@ -61,10 +61,10 @@ function Header() {
       <div
         className={`${
           isMenuOpen ? "block" : "hidden"
-        } top-[100%] absolute bg-white z-10 w-full p-4 `}
+        } top-[100%] absolute xl:relative xl:flex xl:pt-4 justify-between items-center gap-x-4 flex-1 bg-white z-10 w-full p-4 pt-0 `}
       >
         <nav
-          className={` flex flex-col  xl:flex  xl:flex-row xl:items-center gap-y-4 xl:gap-x-5 mt-5 xl:mt-0 w-full xl:w-auto`}
+          className={` flex flex-col  xl:flex  xl:flex-row xl:items-center gap-y-4 xl:gap-x-5  w-full xl:w-auto`}
         >
           <div className=" relative">
             <span

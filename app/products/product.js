@@ -876,17 +876,20 @@ export function getProductByCategory(category) {
     return product.category === category;
   });
 }
-export function searchProduct(input, exactMatch = false) {
-  const trimmedInput = input.trim().toLowerCase();
-
-  if (!trimmedInput) return []; // Return empty array for empty or whitespace input
+export function searchProduct(input) {
+  const uniqueProducts = new Set();
 
   return products.products.filter((product) => {
-    const productTitle = product.title.toLowerCase();
+    const titleLowerCase = product.title.toLowerCase();
 
-    // Exact match or partial match based on the exactMatch flag
-    return exactMatch
-      ? productTitle === trimmedInput
-      : productTitle.includes(trimmedInput);
+    if (
+      titleLowerCase.includes(input.toLowerCase()) &&
+      !uniqueProducts.has(titleLowerCase)
+    ) {
+      uniqueProducts.add(titleLowerCase);
+      return true;
+    }
+
+    return false;
   });
 }

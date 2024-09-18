@@ -1,12 +1,12 @@
-import Image from "next/image";
-import Link from "next/link";
 import Hero from "./components/Hero";
 import Gallery from "./components/Gallery";
+import ElfSightWidget from "./components/Elfsight";
 export default function Home() {
   return (
     <>
       <Hero />
       <Gallery />
+      <ElfSightWidget />
     </>
   );
 }

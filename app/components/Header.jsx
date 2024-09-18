@@ -9,13 +9,7 @@ import {
   FaBars,
   FaTimes,
 } from "react-icons/fa";
-import {
-  RiArrowDropDownFill,
-  RiArrowDropUpFill,
-  RiArrowUpDownFill,
-  RiArrowUpDownLine,
-} from "react-icons/ri";
-import { IoMdArrowDropup } from "react-icons/io";
+import { RiArrowDropDownFill, RiArrowDropUpFill } from "react-icons/ri";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -33,7 +27,7 @@ function Header() {
   const isActive = (href) => currentPath === href;
 
   return (
-    <header className="flex relative flex-col xl:flex-row justify-between items-center p-5 xl:p-10 gap-y-4 xl:gap-x-10">
+    <header className="flex relative z-50 flex-col xl:flex-row justify-between items-center p-5 xl:p-10 gap-y-4 xl:gap-x-10">
       {/* Logo */}
       <div className="flex justify-between items-center w-full xl:w-auto">
         <Link href="/">
@@ -61,7 +55,7 @@ function Header() {
       <div
         className={`${
           isMenuOpen ? "block" : "hidden"
-        } top-[100%] absolute xl:relative xl:flex xl:pt-4 justify-between items-center gap-x-4 flex-1 bg-white z-10 w-full p-4 pt-0 `}
+        } top-[100%] absolute xl:relative xl:flex xl:pt-4 justify-evenly items-center gap-x-4 flex-1 bg-white z-40 w-full p-4 pt-0`}
       >
         <nav
           className={` flex flex-col  xl:flex  xl:flex-row xl:items-center gap-y-4 xl:gap-x-5  w-full xl:w-auto`}
@@ -81,7 +75,7 @@ function Header() {
             <div
               className={`absolute rounded transition-transform ${
                 isToursMenuOpen ? "flex" : "hidden"
-              } flex-col gap-y-2 top-7 left-0 w-60 p-4 bg-white text-black z-50`}
+              } flex-col gap-y-2 top-7 left-0 w-60 shadow-md p-4 bg-white text-black z-50`}
             >
               <Link
                 href="/mpt"

@@ -25,7 +25,7 @@ function SearchBar() {
         } w-full p-4 absolute shadow-md gap-y-4 flex-col z-10 bg-white font-bold`}
       >
         {products.length === 0
-          ? "No matching results"
+          ? "Search for any tour available in Jamaica"
           : products.map((product) => {
               return (
                 <Link

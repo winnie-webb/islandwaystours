@@ -1,6 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import Hero from "./components/Hero";
 export default function Home() {
-  return (
-    <div className="flex justify-center items-center h-screen bg-gray-50"></div>
-  );
+  return <Hero />;
 }

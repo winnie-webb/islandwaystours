@@ -11,6 +11,7 @@ function SearchBar() {
   return (
     <div className="flex-1 relative w-full">
       <input
+        id="search-input"
         onFocus={() => setIsSearching(true)}
         onBlur={() => setIsSearching(false)}
         onChange={(e) => setProducts(searchProduct(e.target.value))}

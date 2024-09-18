@@ -2,7 +2,13 @@
 import React, { useState } from "react";
 import logo from "../../public/logo.jpg";
 import Image from "next/image";
-import { FaFacebook, FaInstagram, FaTiktok, FaBars } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaInstagram,
+  FaTiktok,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -36,7 +42,7 @@ function Header() {
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
-          <FaBars />
+          {isMenuOpen ? <FaTimes /> : <FaBars />} {/* Toggle between icons */}
         </button>
       </div>
 
@@ -55,44 +61,75 @@ function Header() {
             <RiArrowDropDownLine className="text-4xl" />
           </span>
           <div className="absolute rounded scale-0 group-hover:scale-100 transition-transform flex flex-col gap-y-2 top-7 left-0 w-60 p-4 bg-white text-black z-50">
-            <Link href="/mpt" className={isActive("/mpt") ? "underline" : ""}>
+            <Link
+              href="/mpt"
+              className={isActive("/mpt") ? "underline underline-offset-8" : ""}
+            >
               Most Popular Tours
             </Link>
-            <Link href="/at" className={isActive("/at") ? "underline" : ""}>
+            <Link
+              href="/at"
+              className={isActive("/at") ? "underline underline-offset-8" : ""}
+            >
               Airport Transfers
             </Link>
-            <Link href="/ctp" className={isActive("/ctp") ? "underline" : ""}>
+            <Link
+              href="/ctp"
+              className={isActive("/ctp") ? "underline underline-offset-8" : ""}
+            >
               Combo Tour Packages
             </Link>
-            <Link href="/abc" className={isActive("/abc") ? "underline" : ""}>
+            <Link
+              href="/abc"
+              className={isActive("/abc") ? "underline underline-offset-8" : ""}
+            >
               Attractions / Beach / City Tours
             </Link>
-            <Link href="/cse" className={isActive("/cse") ? "underline" : ""}>
+            <Link
+              href="/cse"
+              className={isActive("/cse") ? "underline underline-offset-8" : ""}
+            >
               Cruise Shore Excursions
             </Link>
-            <Link href="/edt" className={isActive("/edt") ? "underline" : ""}>
+            <Link
+              href="/edt"
+              className={isActive("/edt") ? "underline underline-offset-8" : ""}
+            >
               Eating / Dining Tours
             </Link>
-            <Link href="/egt" className={isActive("/egt") ? "underline" : ""}>
+            <Link
+              href="/egt"
+              className={isActive("/egt") ? "underline underline-offset-8" : ""}
+            >
               Exclusive Golf Tours
             </Link>
-            <Link href="/ncb" className={isActive("/ncb") ? "underline" : ""}>
+            <Link
+              href="/ncb"
+              className={isActive("/ncb") ? "underline underline-offset-8" : ""}
+            >
               Night Life / Casino / Bar Tours
             </Link>
-            <Link href="/st" className={isActive("/st") ? "underline" : ""}>
+            <Link
+              href="/st"
+              className={isActive("/st") ? "underline underline-offset-8" : ""}
+            >
               Shopping Tours
             </Link>
           </div>
         </div>
         <Link
           href="/about-us"
-          className={isActive("/about-us") ? "underline" : ""}
+          className={
+            isActive("/about-us") ? "underline underline-offset-8" : ""
+          }
         >
           About Us
         </Link>
         <Link
           href="/contact-us"
-          className={isActive("/contact-us") ? "underline" : ""}
+          className={
+            isActive("/contact-us") ? "underline underline-offset-8" : ""
+          }
         >
           Contact Us
         </Link>

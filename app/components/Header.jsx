@@ -2,58 +2,129 @@
 import React, { useState } from "react";
 import logo from "../../public/logo.jpg";
 import Image from "next/image";
-import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTiktok, FaBars } from "react-icons/fa";
 import { RiArrowDropDownLine } from "react-icons/ri";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SearchBar from "./SearchBar";
+
 function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // For mobile menu
   const currentPath = usePathname();
 
-  // Check for the current path and make the link active by adding the active class
+  // Toggle menu open state
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  // Function to check if link is active
+  const isActive = (href) => currentPath === href;
 
   return (
-    <header className="flex justify-between items-center p-10 gap-x-10">
-      <Link href="/">
-        <Image
-          width={150}
-          height={150}
-          alt="Island Ways Tours Logo"
-          src={logo}
-        ></Image>
-      </Link>
-      <SearchBar></SearchBar>
-      <nav className=" flex items-center gap-x-5">
+    <header className="flex flex-col xl:flex-row justify-between items-center p-5 xl:p-10 gap-y-4 xl:gap-x-10">
+      {/* Logo */}
+      <div className="flex justify-between items-center w-full xl:w-auto">
+        <Link href="/">
+          <Image
+            width={150}
+            height={150}
+            alt="Island Ways Tours Logo"
+            src={logo}
+          />
+        </Link>
+        {/* Hamburger menu for small screens */}
+        <button
+          className="xl:hidden text-3xl"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          <FaBars />
+        </button>
+      </div>
+
+      {/* Search Bar */}
+      <SearchBar />
+
+      {/* Navigation (Hidden on small screens, visible on large) */}
+      <nav
+        className={`${
+          isMenuOpen ? "flex" : "hidden"
+        } flex-col xl:flex xl:flex-row xl:items-center gap-y-4 xl:gap-x-5 mt-5 xl:mt-0 w-full xl:w-auto`}
+      >
         <div className="group relative">
           <span className="cursor-pointer flex items-center">
             Tours
             <RiArrowDropDownLine className="text-4xl" />
           </span>
-          <div className="absolute rounded scale-0 group-hover:scale-100 transition-transform flex flex-col gap-y-2 top-7 left-0 w-60 p-4 bg-white text-black">
-            <Link href="/mpt">Most Popular Tours</Link>
-            <Link href="/at">Airport Transfers</Link>
-            <Link href="/ctp">Combo Tour Packages</Link>
-            <Link href="/abc">Attractions / Beach / City Tours</Link>
-            <Link href="/cse">Cruise Shore Excursions</Link>
-            <Link href="/edt">Eating / Dining Tours</Link>
-            <Link href="/egt">Exclusive Golf Tours</Link>
-            <Link href="/ncb">Night Life / Casino / Bar Tours</Link>
-            <Link href="/st">Shopping Tours</Link>
+          <div className="absolute rounded scale-0 group-hover:scale-100 transition-transform flex flex-col gap-y-2 top-7 left-0 w-60 p-4 bg-white text-black z-50">
+            <Link href="/mpt" className={isActive("/mpt") ? "underline" : ""}>
+              Most Popular Tours
+            </Link>
+            <Link href="/at" className={isActive("/at") ? "underline" : ""}>
+              Airport Transfers
+            </Link>
+            <Link href="/ctp" className={isActive("/ctp") ? "underline" : ""}>
+              Combo Tour Packages
+            </Link>
+            <Link href="/abc" className={isActive("/abc") ? "underline" : ""}>
+              Attractions / Beach / City Tours
+            </Link>
+            <Link href="/cse" className={isActive("/cse") ? "underline" : ""}>
+              Cruise Shore Excursions
+            </Link>
+            <Link href="/edt" className={isActive("/edt") ? "underline" : ""}>
+              Eating / Dining Tours
+            </Link>
+            <Link href="/egt" className={isActive("/egt") ? "underline" : ""}>
+              Exclusive Golf Tours
+            </Link>
+            <Link href="/ncb" className={isActive("/ncb") ? "underline" : ""}>
+              Night Life / Casino / Bar Tours
+            </Link>
+            <Link href="/st" className={isActive("/st") ? "underline" : ""}>
+              Shopping Tours
+            </Link>
           </div>
         </div>
-        <Link href="/about-us">About Us</Link>
-        <Link href="/contact-us">Contact Us</Link>
+        <Link
+          href="/about-us"
+          className={isActive("/about-us") ? "underline" : ""}
+        >
+          About Us
+        </Link>
+        <Link
+          href="/contact-us"
+          className={isActive("/contact-us") ? "underline" : ""}
+        >
+          Contact Us
+        </Link>
       </nav>
-      <div className="flex gap-x-5 justify-between">
+
+      {/* Social Icons (Visible on large screens) */}
+      <div className="hidden xl:flex gap-x-5 justify-between">
         <Link href="https://www.tiktok.com/@islandwaystours">
-          <FaTiktok className="text-3xl"></FaTiktok>
+          <FaTiktok className="text-3xl" />
         </Link>
         <Link href="https://www.facebook.com/profile.php?id=61557477178431">
-          <FaFacebook className="text-3xl"></FaFacebook>
+          <FaFacebook className="text-3xl" />
         </Link>
         <Link href="https://www.instagram.com/islandwaystours/">
-          <FaInstagram className="text-3xl"></FaInstagram>
+          <FaInstagram className="text-3xl" />
+        </Link>
+      </div>
+
+      {/* Social Icons for mobile view (Visible on small screens when menu is open) */}
+      <div
+        className={`${
+          isMenuOpen ? "flex" : "hidden"
+        } xl:hidden flex gap-x-5 justify-center mt-5`}
+      >
+        <Link href="https://www.tiktok.com/@islandwaystours">
+          <FaTiktok className="text-3xl" />
+        </Link>
+        <Link href="https://www.facebook.com/profile.php?id=61557477178431">
+          <FaFacebook className="text-3xl" />
+        </Link>
+        <Link href="https://www.instagram.com/islandwaystours/">
+          <FaInstagram className="text-3xl" />
         </Link>
       </div>
     </header>

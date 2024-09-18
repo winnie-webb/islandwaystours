@@ -9,7 +9,7 @@ function SearchBar() {
   const [isSearching, setIsSearching] = useState(false);
   const [products, setProducts] = useState([]);
   return (
-    <div className="flex-1 relative">
+    <div className="flex-1 relative w-full">
       <input
         onFocus={() => setIsSearching(true)}
         onBlur={() => setIsSearching(false)}

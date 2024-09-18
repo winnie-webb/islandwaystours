@@ -2,16 +2,15 @@
 import React, { useState } from "react";
 import logo from "../../public/logo.jpg";
 import Image from "next/image";
-import { FaFacebook, FaInstagram, FaSearch, FaTiktok } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { searchProduct } from "../products/product";
+import SearchBar from "./SearchBar";
 function Header() {
   const currentPath = usePathname();
-  const [isSearching, setIsSearching] = useState(false);
-  const [products, setProducts] = useState([]);
+
   // Check for the current path and make the link active by adding the active class
 
   return (
@@ -24,49 +23,7 @@ function Header() {
           src={logo}
         ></Image>
       </Link>
-      <div className="flex-1 relative">
-        <input
-          onFocus={() => setIsSearching(true)}
-          onBlur={() => setIsSearching(false)}
-          onChange={(e) => setProducts(searchProduct(e.target.value))}
-          className=" shadow-md w-full border-white rounded-full outline-none p-3 border-[3px] focus:border-[3px] focus:border-orange-300 transition-all duration-200"
-          placeholder="Search tours..."
-        />
-        {/* Create Container for search results 
-        
-        */}
-        <div
-          className={`${
-            isSearching ? "flex" : "hidden"
-          } w-full p-4 absolute shadow-md gap-y-4 flex-col z-10 bg-white font-bold`}
-        >
-          {products.length === 0
-            ? "No matching results"
-            : products.map((product) => {
-                return (
-                  <Link
-                    href={`/products/${product.id}`}
-                    key={` ${Math.random().toString(36).substr(2, 9)}`}
-                  >
-                    <div className="flex items-center gap-x-3">
-                      <Image
-                        alt={`Image of ${product.title}`}
-                        width={50}
-                        height={50}
-                        src={`/${product.id.split("-").shift()}/${
-                          product.id
-                        }.webp`}
-                      ></Image>
-                      <p>{product.title}</p>
-                      <p>{`$${product.priceLowest}`}</p>
-                    </div>
-                  </Link>
-                );
-              })}
-        </div>
-
-        <FaSearch className="absolute right-4 top-4 text-primary text-xl cursor-pointer" />
-      </div>
+      <SearchBar></SearchBar>
       <nav className=" flex items-center gap-x-5">
         <div className="group relative">
           <span className="cursor-pointer flex items-center">

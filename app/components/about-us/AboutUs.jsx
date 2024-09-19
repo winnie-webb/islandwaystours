@@ -31,7 +31,7 @@ function AboutUs() {
         </div>
       </div>
       <div className="flex mt-10 md:mt-20 flex-col md:flex-row  justify-between gap-4">
-        <div className="md:flex-[55%] p-4">
+        <div className="md:flex-[55%]">
           <h3 className="font-bold text-3xl mb-4">Our mission</h3>
           <p className=" font-medium  text-base md:leading-7 ">
             To empower individuals to explore the best tours Jamaica has to
@@ -42,7 +42,7 @@ function AboutUs() {
             practices.
           </p>
         </div>
-        <div className="md:flex-[45%] p-4">
+        <div className="md:flex-[45%]">
           <h3 className="font-bold text-3xl mb-4">Our vision</h3>
           <p className=" font-medium  text-base md:leading-7">
             Striving to be the best Jamaica tour and travel partner, we envision

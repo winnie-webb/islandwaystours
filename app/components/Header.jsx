@@ -171,15 +171,18 @@ function Header() {
 
         {/* Social Icons (Visible on large screens) */}
         <div className="hidden xl:flex gap-x-5 justify-between">
-          <Link href="https://www.tiktok.com/@islandwaystours">
+          <a target="_blank" href="https://www.tiktok.com/@islandwaystours">
             <FaTiktok className="text-3xl" />
-          </Link>
-          <Link href="https://www.facebook.com/profile.php?id=61557477178431">
+          </a>
+          <a
+            target="_blank"
+            href="https://www.facebook.com/profile.php?id=61557477178431"
+          >
             <FaFacebook className="text-3xl" />
-          </Link>
-          <Link href="https://www.instagram.com/islandwaystours/">
+          </a>
+          <a target="_blank" href="https://www.instagram.com/islandwaystours/">
             <FaInstagram className="text-3xl" />
-          </Link>
+          </a>
         </div>
 
         {/* Social Icons for mobile view (Visible on small screens when menu is open) */}
@@ -188,15 +191,18 @@ function Header() {
             isMenuOpen ? "flex" : "hidden"
           } xl:hidden flex gap-x-5 justify-center mt-5`}
         >
-          <Link href="https://www.tiktok.com/@islandwaystours">
+          <a target="_blank" href="https://www.tiktok.com/@islandwaystours">
             <FaTiktok className="text-3xl" />
-          </Link>
-          <Link href="https://www.facebook.com/profile.php?id=61557477178431">
+          </a>
+          <a
+            target="_blank"
+            href="https://www.facebook.com/profile.php?id=61557477178431"
+          >
             <FaFacebook className="text-3xl" />
-          </Link>
-          <Link href="https://www.instagram.com/islandwaystours/">
+          </a>
+          <a target="_blank" href="https://www.instagram.com/islandwaystours/">
             <FaInstagram className="text-3xl" />
-          </Link>
+          </a>
         </div>
       </div>
     </header>

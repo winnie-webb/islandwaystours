@@ -15,15 +15,21 @@ function Footer() {
           <div className=" flex-[45%] mt-4 md:mt-0">
             <h4 className="mb-2 font-bold">Socials</h4>
             <div className="flex gap-x-5">
-              <Link href="https://www.tiktok.com/@islandwaystours">
+              <a target="_blank" href="https://www.tiktok.com/@islandwaystours">
                 <FaTiktok className="text-3xl" />
-              </Link>
-              <Link href="https://www.facebook.com/profile.php?id=61557477178431">
+              </a>
+              <a
+                target="_blank"
+                href="https://www.facebook.com/profile.php?id=61557477178431"
+              >
                 <FaFacebook className="text-3xl" />
-              </Link>
-              <Link href="https://www.instagram.com/islandwaystours/">
+              </a>
+              <a
+                target="_blank"
+                href="https://www.instagram.com/islandwaystours/"
+              >
                 <FaInstagram className="text-3xl" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>

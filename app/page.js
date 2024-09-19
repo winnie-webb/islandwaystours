@@ -14,10 +14,12 @@ export default function Home() {
       <Category
         title="Most Popular Tours"
         data={filterProductByCategory("mpt")}
+        itemsPerPage={3}
       ></Category>
       <Category
         title="Airport Transfers"
         data={filterProductByCategory("at")}
+        itemsPerPage={3}
       ></Category>
       <AboutUs />
       <Footer />

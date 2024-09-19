@@ -27,9 +27,14 @@ const Category = ({ title, description = "", data, itemsPerPage = 4 }) => {
       <h2 className="text-3xl font-bold text-center mb-6">{title}</h2>
       <p className="text-lg text-center mb-8">{description}</p>
       {/* Grid layout for responsive display */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div
+        className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-${itemsPerPage} gap-6`}
+      >
         {paginatedData.map((tour, index) => (
-          <div key={index} className="relative">
+          <div
+            key={index}
+            className="relative hover:shadow-md transition-shadow cursor-pointer"
+          >
             <div className="relative h-64 w-full overflow-hidden ">
               <Image
                 className="object-fill object-center"
@@ -38,11 +43,11 @@ const Category = ({ title, description = "", data, itemsPerPage = 4 }) => {
                 fill={true}
               />
             </div>
-            <div className="mt-4">
-              <h3 className="text-base text-gray-600 font-semibold">
-                {tour.title}
-              </h3>
-              <p className="font-bold my-1">Starting at ${tour.priceLowest}</p>
+            <div className="mt-2 p-2 ">
+              <h3 className="text-base  font-bold">{tour.title}</h3>
+              <p className=" my-1 text-orange-600 font-semibold">
+                Starting at ${tour.priceLowest}
+              </p>
               <p className="text-gray-600 font-semibold">Per Person</p>
             </div>
           </div>

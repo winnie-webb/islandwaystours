@@ -4,6 +4,7 @@ import ElfSightWidget from "./components/Elfsight";
 import Category from "./components/Category";
 import { filterProductByCategory } from "./products/product";
 import AboutUs from "./components/about-us/AboutUs";
+import Footer from "./components/Footer";
 export default function Home() {
   return (
     <>
@@ -19,6 +20,7 @@ export default function Home() {
         data={filterProductByCategory("at")}
       ></Category>
       <AboutUs />
+      <Footer />
     </>
   );
 }

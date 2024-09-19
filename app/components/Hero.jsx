@@ -25,7 +25,7 @@ function Hero() {
 
             searchElement.focus();
           }}
-          className="bg-[#ff6b6b] hover:bg-[#ff4d4d] text-white font-bold py-3 px-6 w-1/2 lg:w-1/4 mx-auto rounded-full shadow-lg transition-all duration-300 mt-6"
+          className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 w-1/2 lg:w-1/4 mx-auto rounded-full shadow-lg transition-all duration-300 mt-6"
         >
           Book Now
         </button>

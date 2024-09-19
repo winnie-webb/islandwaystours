@@ -3,6 +3,7 @@ import Gallery from "./components/Gallery";
 import ElfSightWidget from "./components/Elfsight";
 import Category from "./components/Category";
 import { filterProductByCategory } from "./products/product";
+import AboutUs from "./components/about-us/AboutUs";
 export default function Home() {
   return (
     <>
@@ -17,6 +18,7 @@ export default function Home() {
         title="Airport Transfers"
         data={filterProductByCategory("at")}
       ></Category>
+      <AboutUs />
     </>
   );
 }

@@ -3,13 +3,13 @@ import React from "react";
 
 function AboutUs() {
   return (
-    <section className="p-4 md:p-10 xl:w-[85%] 2xl:w-[65%] mx-auto">
+    <section className="p-4 my-8 md:p-10 xl:w-[85%] 2xl:w-[70%] mx-auto">
       <div className="flex  flex-col md:flex-row md:items-center justify-between gap-5">
         <div className="md:flex-[55%]">
-          <h2 className="font-bold text-3xl md:text-4xl  mb-4">
+          <h2 className="font-bold text-3xl md:text-4xl  md:mb-8">
             Get to know us
           </h2>
-          <p className=" font-medium  text-lg md:leading-8	">
+          <p className=" font-medium text-lg md:leading-8	">
             Discover {"Jamaica's"} hidden treasures with Island Ways Tours, your
             premier private bus tour agency. Explore the {"island's"} stunning
             landscapes, rich culture, and iconic attractions on our expertly
@@ -21,7 +21,7 @@ function AboutUs() {
             of the island with comfort and convenience.
           </p>
         </div>
-        <div className="relative w-90 h-72 md:flex-[45%] md:mt-14 md:h-80 ">
+        <div className="relative w-90 h-72 md:flex-[45%] md:mt-14 md:h-[22rem] ">
           <Image
             alt="Image of Founder with clients Island Ways Tours"
             src="/local/hero-1.jpg"
@@ -30,9 +30,9 @@ function AboutUs() {
           ></Image>
         </div>
       </div>
-      <div className="flex mt-10 md:mt-20 flex-col md:flex-row  justify-between gap-4">
+      <div className="flex mt-20 md:mt-20  flex-col md:flex-row  justify-between gap-4">
         <div className="md:flex-[55%]">
-          <h3 className="font-bold text-3xl mb-4">Our mission</h3>
+          <h3 className="font-bold text-3xl md:mb-8 mb-4">Our mission</h3>
           <p className=" font-medium  text-base md:leading-7 ">
             To empower individuals to explore the best tours Jamaica has to
             offer, fostering meaningful connections and unforgettable
@@ -43,7 +43,7 @@ function AboutUs() {
           </p>
         </div>
         <div className="md:flex-[45%]">
-          <h3 className="font-bold text-3xl mb-4">Our vision</h3>
+          <h3 className="font-bold text-3xl md:mb-8 mb-4">Our vision</h3>
           <p className=" font-medium  text-base md:leading-7">
             Striving to be the best Jamaica tour and travel partner, we envision
             a world where every journey is a transformative adventure. Our

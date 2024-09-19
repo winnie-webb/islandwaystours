@@ -769,7 +769,7 @@ export const products = {
       desc: "",
       priceLowest: "20.00",
       priceHighest: "65.00",
-      category: "edt",
+      category: "egt",
     },
     {
       id: "egt-2",
@@ -777,7 +777,7 @@ export const products = {
       desc: "",
       priceLowest: "12.50",
       priceHighest: "40.00",
-      category: "edt",
+      category: "egt",
     },
     {
       id: "egt-3",
@@ -785,7 +785,7 @@ export const products = {
       desc: "",
       priceLowest: "12.50",
       priceHighest: "40.00",
-      category: "edt",
+      category: "egt",
     },
     {
       id: "egt-4",
@@ -793,7 +793,7 @@ export const products = {
       desc: "",
       priceLowest: "12.50",
       priceHighest: "40.00",
-      category: "edt",
+      category: "egt",
     },
 
     {

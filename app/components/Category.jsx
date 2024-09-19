@@ -38,7 +38,7 @@ const Category = ({ title, description = "", data, itemsPerPage = 4 }) => {
             <div className="relative h-64 w-full overflow-hidden ">
               <Image
                 className="object-fill object-center"
-                src={`/${tour.category}/${tour.id}.webp`}
+                src={`/${tour.id.split("-").shift()}/${tour.id}.webp`}
                 alt={tour.title}
                 fill={true}
               />

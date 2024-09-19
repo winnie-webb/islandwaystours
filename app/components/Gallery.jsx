@@ -16,7 +16,7 @@ function Gallery() {
   ];
 
   return (
-    <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 p-4">
+    <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 p-4 xl:p-10">
       {images.map((image, index) => (
         <div key={index} className="relative w-full h-48 lg:h-72">
           <Image

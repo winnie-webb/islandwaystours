@@ -14,7 +14,7 @@ function Hero() {
           Island Ways Tours
         </h1>
         <p className="text-lg xl:text-xl my-4 text-center">
-          We offer the best Jamaica tours and airport transfers at the most
+          We offer the best Jamaica tours and Airport transfers at the most
           affordable prices
         </p>
 

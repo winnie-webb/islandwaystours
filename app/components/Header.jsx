@@ -78,7 +78,7 @@ function Header() {
               } flex-col gap-y-2 top-7 left-0 w-60 shadow-md p-4 bg-white text-black z-50`}
             >
               <Link
-                href="/mpt"
+                href="/category/mpt"
                 className={
                   isActive("/mpt") ? "underline underline-offset-8" : ""
                 }
@@ -86,7 +86,7 @@ function Header() {
                 Most Popular Tours
               </Link>
               <Link
-                href="/at"
+                href="/category/at"
                 className={
                   isActive("/at") ? "underline underline-offset-8" : ""
                 }
@@ -94,7 +94,7 @@ function Header() {
                 Airport Transfers
               </Link>
               <Link
-                href="/ctp"
+                href="/category/ctp"
                 className={
                   isActive("/ctp") ? "underline underline-offset-8" : ""
                 }
@@ -102,7 +102,7 @@ function Header() {
                 Combo Tour Packages
               </Link>
               <Link
-                href="/abc"
+                href="/category/abc"
                 className={
                   isActive("/abc") ? "underline underline-offset-8" : ""
                 }
@@ -110,7 +110,7 @@ function Header() {
                 Attractions / Beach / City Tours
               </Link>
               <Link
-                href="/cse"
+                href="/category/cse"
                 className={
                   isActive("/cse") ? "underline underline-offset-8" : ""
                 }
@@ -118,7 +118,7 @@ function Header() {
                 Cruise Shore Excursions
               </Link>
               <Link
-                href="/edt"
+                href="/category/edt"
                 className={
                   isActive("/edt") ? "underline underline-offset-8" : ""
                 }
@@ -126,7 +126,7 @@ function Header() {
                 Eating / Dining Tours
               </Link>
               <Link
-                href="/egt"
+                href="/category/egt"
                 className={
                   isActive("/egt") ? "underline underline-offset-8" : ""
                 }
@@ -134,7 +134,7 @@ function Header() {
                 Exclusive Golf Tours
               </Link>
               <Link
-                href="/ncb"
+                href="/category/ncb"
                 className={
                   isActive("/ncb") ? "underline underline-offset-8" : ""
                 }
@@ -142,7 +142,7 @@ function Header() {
                 Night Life / Casino / Bar Tours
               </Link>
               <Link
-                href="/st"
+                href="/category/st"
                 className={
                   isActive("/st") ? "underline underline-offset-8" : ""
                 }

@@ -893,3 +893,6 @@ export function searchProduct(input) {
     return false;
   });
 }
+export function filterProductByCategory(category) {
+  return products.products.filter((product) => product.category === category);
+}

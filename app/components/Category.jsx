@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import Link from "next/link";
 
 const Category = ({ title, description = "", data, itemsPerPage = 4 }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,7 +32,8 @@ const Category = ({ title, description = "", data, itemsPerPage = 4 }) => {
         className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-${itemsPerPage} gap-6`}
       >
         {paginatedData.map((tour, index) => (
-          <div
+          <Link
+            href={`/product/${tour.id}`}
             key={index}
             className="relative hover:shadow-md transition-shadow cursor-pointer"
           >
@@ -50,7 +52,7 @@ const Category = ({ title, description = "", data, itemsPerPage = 4 }) => {
               </p>
               <p className="text-gray-600 font-semibold">Per Person</p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 

@@ -22,7 +22,6 @@ export default function Home() {
         itemsPerPage={3}
       ></Category>
       <AboutUs />
-      <Footer />
     </>
   );
 }

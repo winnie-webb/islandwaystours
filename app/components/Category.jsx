@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const Category = ({ title, description = "", data, itemsPerPage = 4 }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,12 +39,11 @@ const Category = ({ title, description = "", data, itemsPerPage = 4 }) => {
               />
             </div>
             <div className="mt-4">
-              <h3 className="text-base text-gray-600 text-center font-semibold">
+              <h3 className="text-base text-gray-600 font-semibold">
                 {tour.title}
               </h3>
-              <p className=" text-center font-extrabold">
-                Starting at ${tour.priceLowest}
-              </p>
+              <p className="font-bold my-1">Starting at ${tour.priceLowest}</p>
+              <p className="text-gray-600 font-semibold">Per Person</p>
             </div>
           </div>
         ))}
@@ -56,7 +56,7 @@ const Category = ({ title, description = "", data, itemsPerPage = 4 }) => {
           disabled={currentPage === 1}
           className="px-4 py-2 mx-1 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 disabled:opacity-50"
         >
-          Previous
+          <FaAngleLeft />
         </button>
         {Array.from({ length: totalPages }, (_, index) => (
           <button
@@ -64,7 +64,7 @@ const Category = ({ title, description = "", data, itemsPerPage = 4 }) => {
             onClick={() => changePage(index + 1)}
             className={`px-4 py-2 mx-1 rounded-md ${
               currentPage === index + 1
-                ? "bg-blue-500 text-white"
+                ? "bg-orange-600 text-white"
                 : "bg-gray-300 text-gray-800 hover:bg-gray-400"
             }`}
           >
@@ -76,7 +76,7 @@ const Category = ({ title, description = "", data, itemsPerPage = 4 }) => {
           disabled={currentPage === totalPages}
           className="px-4 py-2 mx-1 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 disabled:opacity-50"
         >
-          Next
+          <FaAngleRight />
         </button>
       </div>
     </section>

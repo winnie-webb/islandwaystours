@@ -896,3 +896,6 @@ export function searchProduct(input) {
 export function filterProductByCategory(category) {
   return products.products.filter((product) => product.category === category);
 }
+export function filterProductById(id) {
+  return products.products.find((product) => product.id === id);
+}

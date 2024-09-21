@@ -3,7 +3,6 @@ import React, { useRef, useState, useEffect, useCallback } from "react";
 import Pickup from "./Pickup";
 import NumberofPersons from "./NumberofPersons";
 import emailjs from "@emailjs/browser";
-import { handleStripeCheckout } from "./handleStripeChekout";
 
 function BookingForm({ tour }) {
   const form = useRef();

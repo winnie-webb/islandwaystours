@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect, useCallback } from "react";
 import Pickup from "./Pickup";
 import NumberofPersons from "./NumberofPersons";
 import emailjs from "@emailjs/browser";
+import { handleStripeCheckout } from "./handleStripeChekout";
 
 function BookingForm({ tour }) {
   const form = useRef();
@@ -45,13 +46,24 @@ function BookingForm({ tour }) {
   };
 
   const sendEmail = (e) => {
-    e.preventDefault();
+    const formData = {
+      email: form.current.email.value,
+      pickup_dropoff: form.current["pickup-dropoff"].value,
+      pickup_date: form.current["pickup-date"].value,
+      pickup_time: form.current["pickup-time"].value,
+      pickup_location: form.current["pickup-location"].value,
+      adults: adults, // From state
+      kids: kids, // From state
+      pay_online: form.current["pay-online"].checked ? "Yes" : "No", // Pay online field
+      price_per_person: (tour.priceLowest * locationMultiplier).toFixed(2),
+      total_price: totalPrice, // From state
+    };
 
     emailjs
-      .sendForm(
+      .send(
         "service_412v84l",
         "template_id3plor",
-        form.current,
+        formData, // Use the manually created form data
         "gihsdAW3D3RqHeLSw"
       )
       .then(
@@ -69,7 +81,10 @@ function BookingForm({ tour }) {
       ref={form}
       id="booking-form"
       className="max-w-3xl mx-auto bg-white p-6 shadow-lg rounded-lg mt-8"
-      onSubmit={sendEmail}
+      onSubmit={(e) => {
+        e.preventDefault();
+        sendEmail();
+      }}
     >
       <h2 className="text-2xl font-bold text-center mb-6 text-orange-600">
         Booking Form

@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect, useCallback } from "react";
 import Pickup from "./Pickup";
 import NumberofPersons from "./NumberofPersons";
 import emailjs from "@emailjs/browser";
+import BookingSuccessMsg from "./BookingSuccessMsg";
 
 function BookingForm({ tour }) {
   const form = useRef();
@@ -10,7 +11,7 @@ function BookingForm({ tour }) {
   const [locationMultiplier, setLocationMultiplier] = useState(1);
   const [adults, setAdults] = useState(0);
   const [kids, setKids] = useState(0);
-
+  const [isMsgSent, setIsMsgSent] = useState(false);
   const locationPricing = {
     Falmouth: 1,
     Lucea: 1.1,
@@ -67,15 +68,18 @@ function BookingForm({ tour }) {
       )
       .then(
         () => {
-          console.log("SUCCESS! Email sent.");
+          setIsMsgSent(true);
         },
         (error) => {
           console.log("FAILED...", error.text);
+          alert(
+            "Error sending email. Please try to dm us on Facebook messenger, Instagram, or Whatsapp"
+          );
         }
       );
   };
 
-  return (
+  return !isMsgSent ? (
     <form
       ref={form}
       id="booking-form"
@@ -148,6 +152,8 @@ function BookingForm({ tour }) {
         Book Now
       </button>
     </form>
+  ) : (
+    <BookingSuccessMsg isMsgSent={isMsgSent}></BookingSuccessMsg>
   );
 }
 

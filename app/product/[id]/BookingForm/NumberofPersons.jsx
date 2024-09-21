@@ -18,7 +18,7 @@ function NumberofPersons({ onAdultsChange, onKidsChange }) {
       <div className="flex justify-between mb-4">
         <div className="w-1/2 pr-2">
           <label htmlFor="persons-over-5" className="block text-gray-700">
-            Adults (5 years and older):
+            Adults (5 years+):
           </label>
           <input
             type="number"

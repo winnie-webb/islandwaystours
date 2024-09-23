@@ -1,9 +1,13 @@
-import { filterProductById } from "@/app/products/product";
+import { filterProductById, products } from "@/app/products/product";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import BookingForm from "./BookingForm/BookingForm";
-
+export function generateStaticParams() {
+  return products.products.map((product) => ({
+    id: product.id, // Correctly returning the id in an object
+  }));
+}
 function page({ params }) {
   const { id } = params;
   const tour = filterProductById(id);

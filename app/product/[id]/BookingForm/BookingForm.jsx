@@ -4,6 +4,7 @@ import Pickup from "./Pickup";
 import NumberofPersons from "./NumberofPersons";
 import emailjs from "@emailjs/browser";
 import BookingSuccessMsg from "./BookingSuccessMsg";
+import { handleStripeCheckout } from "./handleStripeCheckout";
 
 function BookingForm({ tour }) {
   const form = useRef();
@@ -12,6 +13,7 @@ function BookingForm({ tour }) {
   const [adults, setAdults] = useState(0);
   const [kids, setKids] = useState(0);
   const [isMsgSent, setIsMsgSent] = useState(false);
+  const [isPayingOnline, setIsPayingOnline] = useState(false);
   const locationPricing = {
     Falmouth: 1,
     Lucea: 1.1,
@@ -54,7 +56,7 @@ function BookingForm({ tour }) {
       pickup_location: form.current["pickup-location"].value,
       adults: adults, // From state
       kids: kids, // From state
-      pay_online: form.current["pay-online"].checked ? "Yes" : "No", // Pay online field
+      pay_online: isPayingOnline ? "Yes" : "No", // Pay online field
       price_per_person: (tour.priceLowest * locationMultiplier).toFixed(2),
       total_price: totalPrice, // From state
     };
@@ -68,7 +70,7 @@ function BookingForm({ tour }) {
       )
       .then(
         () => {
-          setIsMsgSent(true);
+          // setIsMsgSent(true);
         },
         (error) => {
           console.log("FAILED...", error.text);
@@ -87,6 +89,7 @@ function BookingForm({ tour }) {
       onSubmit={(e) => {
         e.preventDefault();
         sendEmail();
+        if (isPayingOnline) handleStripeCheckout(tour.title, totalPrice);
       }}
     >
       <h2 className="text-2xl font-bold text-center mb-6 text-orange-600">
@@ -121,6 +124,10 @@ function BookingForm({ tour }) {
           id="pay-online"
           name="pay-online"
           className="mr-2"
+          onChange={(e) => {
+            setIsPayingOnline(e.target.checked);
+            console.log("Checked: " + e.target.checked);
+          }}
         />
         <label htmlFor="pay-online" className="text-gray-700 font-semibold">
           Paying Online

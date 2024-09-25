@@ -47,8 +47,8 @@ const Category = ({ title, description = "", data, itemsPerPage = 4 }) => {
             </div>
             <div className="mt-2 p-2 ">
               <h3 className="text-base  font-bold">{tour.title}</h3>
-              <p className=" my-1 text-orange-600 font-semibold">
-                Starting at ${tour.priceLowest}
+              <p className=" my-1 text-xl text-orange-600 font-semibold">
+                ${tour.priceLowest}
               </p>
               <p className="font-semibold">(Per Person)</p>
             </div>

@@ -1,7 +1,6 @@
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Script from "next/script";
 
 export const metadata = {
   title: "Island Ways Tours",
@@ -12,9 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        <Script src="https://js.stripe.com/v3/" strategy="beforeInteractive" />
-      </head>
+      <head></head>
       <body>
         <Header></Header>
         {children}

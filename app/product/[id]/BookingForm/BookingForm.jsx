@@ -114,7 +114,7 @@ function BookingForm({ tour }) {
           }}
         />
         <label htmlFor="pay-online" className="text-gray-700 font-semibold">
-          Paying Online
+          Do you want to pay online?
         </label>
       </div>
       <p className="text-gray-600 text-sm mb-4">

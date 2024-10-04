@@ -4,7 +4,6 @@ import Pickup from "./Pickup";
 import NumberofPersons from "./NumberofPersons";
 import emailjs from "@emailjs/browser";
 import BookingSuccessMsg from "./BookingSuccessMsg";
-import { handleStripeCheckout } from "./handleStripeCheckout";
 
 function BookingForm({ tour }) {
   const form = useRef();
@@ -14,30 +13,16 @@ function BookingForm({ tour }) {
   const [kids, setKids] = useState(0);
   const [isMsgSent, setIsMsgSent] = useState(false);
   const [isPayingOnline, setIsPayingOnline] = useState(false);
-  const locationPricing = {
-    Falmouth: 1,
-    Lucea: 1.1,
-    "Montego Bay": 1,
-    Negril: 1.3,
-    "Ocho Rios": 1.4,
-    Runaway: 1.2,
-  };
 
   const calculateTotalPrice = useCallback(() => {
-    const pricePerPerson = tour.priceLowest * locationMultiplier;
+    const pricePerPerson = tour.priceLowest;
     const total = adults * pricePerPerson;
     setTotalPrice(total.toFixed(2));
-  }, [tour.priceLowest, locationMultiplier, adults]); // Add dependencies
+  }, [tour.priceLowest, adults]); // Add dependencies
 
   useEffect(() => {
     calculateTotalPrice();
-  }, [tour.priceLowest, locationMultiplier, adults, calculateTotalPrice]);
-
-  const handleLocationChange = (e) => {
-    const selectedLocation = e.target.value;
-    setLocationMultiplier(locationPricing[selectedLocation]);
-    calculateTotalPrice();
-  };
+  }, [tour.priceLowest, adults, calculateTotalPrice]);
 
   const handleAdultsChange = (value) => {
     setAdults(value);
@@ -89,14 +74,14 @@ function BookingForm({ tour }) {
       onSubmit={(e) => {
         e.preventDefault();
         sendEmail();
-        if (isPayingOnline) handleStripeCheckout(tour.title, totalPrice);
+        setIsMsgSent(!isMsgSent);
       }}
     >
       <h2 className="text-2xl font-bold text-center mb-6 text-orange-600">
         Booking Form
       </h2>
 
-      <Pickup onLocationChange={handleLocationChange} />
+      <Pickup />
       <NumberofPersons
         onAdultsChange={handleAdultsChange}
         onKidsChange={handleKidsChange}
@@ -126,7 +111,6 @@ function BookingForm({ tour }) {
           className="mr-2"
           onChange={(e) => {
             setIsPayingOnline(e.target.checked);
-            console.log("Checked: " + e.target.checked);
           }}
         />
         <label htmlFor="pay-online" className="text-gray-700 font-semibold">
@@ -147,6 +131,7 @@ function BookingForm({ tour }) {
           Total Price: $
           <span id="total-price" className="font-semibold">
             {totalPrice}
+            This price is only a low ball price
           </span>
         </p>
       </div>

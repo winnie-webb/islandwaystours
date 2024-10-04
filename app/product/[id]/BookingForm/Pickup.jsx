@@ -1,6 +1,6 @@
 import React from "react";
 
-function Pickup({ onLocationChange }) {
+function Pickup() {
   return (
     <>
       <div className="mb-4">
@@ -14,7 +14,6 @@ function Pickup({ onLocationChange }) {
           id="pickup-dropoff"
           name="pickup-dropoff"
           required
-          onChange={onLocationChange} // Trigger on change
           className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-orange-300 focus:outline-none"
         >
           <option value="" disabled>

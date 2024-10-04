@@ -152,6 +152,12 @@ function Header() {
             </div>
           </div>
           <Link
+            href="/pay"
+            className={isActive("/pay") ? "underline underline-offset-8" : ""}
+          >
+            Payments
+          </Link>
+          <Link
             href="/about-us"
             className={
               isActive("/about-us") ? "underline underline-offset-8" : ""

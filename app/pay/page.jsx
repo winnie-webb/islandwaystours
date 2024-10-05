@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import PayPalButton from "../components/PaypalBtn";
-
+import "./iframe.css";
 const PaymentPage = () => {
   const [amount, setAmount] = useState("");
 

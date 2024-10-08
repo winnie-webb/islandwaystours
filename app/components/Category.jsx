@@ -11,10 +11,9 @@ const Category = ({ title, description = "", data, itemsPerPage = 4 }) => {
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
   // Slice the data array to show only the items for the current page
-  const paginatedData = data.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  const paginatedData = data
+    .sort((a, b) => a.priceLowest - b.priceLowest)
+    .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   // Change page
   const changePage = (pageNumber) => {

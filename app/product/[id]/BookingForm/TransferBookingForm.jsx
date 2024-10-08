@@ -67,7 +67,7 @@ export const TransferBookingForm = ({ tour }) => {
   const sendEmail = (e) => {
     e.preventDefault();
     const formData = {
-      tourName: tour.title,
+      tour_name: tour.title,
       email: form.current.email.value,
       phone_number: form.current.phone_number.value,
       pickup_dropoff: transferDetails.pickupDropoff,
@@ -89,10 +89,10 @@ export const TransferBookingForm = ({ tour }) => {
 
     emailjs
       .send(
-        "service_b3u5zxa",
-        "template_7eif1gi",
+        "service_412v84l",
+        "template_rliva3r",
         formData,
-        "nxC4W-fiaC4DvJpPJ"
+        "gihsdAW3D3RqHeLSw"
       )
       .then(
         () => {

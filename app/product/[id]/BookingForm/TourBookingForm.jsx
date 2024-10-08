@@ -37,6 +37,7 @@ export const TourBookingForm = ({ tour }) => {
 
   const sendEmail = (e) => {
     const formData = {
+      tour_name: tour.title,
       email: form.current.email.value,
       phone_number: form.current.phone_number.value,
       tourName: tour.title,
@@ -53,10 +54,10 @@ export const TourBookingForm = ({ tour }) => {
 
     emailjs
       .send(
-        "service_b3u5zxa",
-        "template_rrfkk4m",
+        "service_412v84l",
+        "template_id3plor",
         formData, // Use the manually created form data
-        "nxC4W-fiaC4DvJpPJ"
+        "gihsdAW3D3RqHeLSw"
       )
       .then(
         () => {

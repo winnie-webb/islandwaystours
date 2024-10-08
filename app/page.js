@@ -3,8 +3,7 @@ import Gallery from "./components/Gallery";
 import ElfSightWidget from "./components/Elfsight";
 import Category from "./components/Category";
 import { filterProductByCategory } from "./products/product";
-import AboutUs from "./components/about-us/AboutUs";
-import Footer from "./components/Footer";
+import AboutUs from "./components/AboutUs";
 export default function Home() {
   return (
     <>

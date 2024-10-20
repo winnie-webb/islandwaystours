@@ -54,14 +54,14 @@ export const TourBookingForm = ({ tour }) => {
 
     emailjs
       .send(
-        "service_412v84l",
-        "template_id3plor",
-        formData, // Use the manually created form data
-        "gihsdAW3D3RqHeLSw"
+        "service_jkakbwm",
+        "template_ibknzsh",
+        formData,
+        "RR28X9JtFyIaAYPWA"
       )
       .then(
         () => {
-          // setIsMsgSent(true);
+          setIsMsgSent(true);
         },
         (error) => {
           console.log("FAILED...", error.text);

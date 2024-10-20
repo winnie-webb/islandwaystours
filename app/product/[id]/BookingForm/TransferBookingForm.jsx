@@ -90,10 +90,10 @@ export const TransferBookingForm = ({ tour }) => {
 
     emailjs
       .send(
-        "service_412v84l",
-        "template_rliva3r",
+        "service_jkakbwm",
+        "template_c9x6dub",
         formData,
-        "gihsdAW3D3RqHeLSw"
+        "RR28X9JtFyIaAYPWA"
       )
       .then(
         () => {
@@ -419,7 +419,6 @@ export const TransferBookingForm = ({ tour }) => {
         (If you want to pay when you arrive, please leave the box unchecked)
       </p>
       <div className="text-lg mb-2">
-       
         <p>
           Total Price: $
           <span id="total-price" className="font-semibold">

@@ -742,6 +742,20 @@ export const products = {
       category: "ctp",
     },
     {
+      id: "ctp-26",
+      title: "Dunn’s River Falls & Blue Hole Ocho Rios Combo Tour Package",
+      desc: "",
+      priceLowest: "30.00",
+      priceHighest: "80.00",
+      priceFalmouth: "43",
+      priceLucea: "55",
+      priceMobay: "50",
+      priceNegril: "75",
+      priceOchi: "30",
+      priceRunaway: "50",
+      category: "ctp",
+    },
+    {
       id: "abc-1",
       title:
         "Rastasafari Experience Includes ATV and Dune Buggy Experience Savanna La Mar",

@@ -42,7 +42,7 @@ export const products = {
       desc: "",
       priceLowest: "25.00",
       priceHighest: "50.00",
-      "Sandals White House": "25",
+      "Sandals White House Price": "25",
       category: "at",
     },
     {
@@ -127,7 +127,7 @@ export const products = {
       category: "at",
       "All Other Resorts in Runaway Bay Price": "16",
       "All Villas/Airbnbs/Homes in Runaway Bay Price": "16",
-      "Melia Braco": "16",
+      "Melia Braco Price": "16",
     },
     {
       id: "at-10",
@@ -1519,4 +1519,255 @@ export function filterProductByCategory(category) {
 }
 export function filterProductById(id) {
   return products.products.find((product) => product.id === id);
+}
+
+/* ------------------------------------------------------------------------ *
+ * Presentation layer
+ *
+ * Everything below derives display data from the catalogue above. The raw
+ * records are never rewritten: the booking forms read their rates straight off
+ * the `price*` / `... Price` keys, so those must stay exactly as they are.
+ * Enriched copies are plain spreads of the original, which keeps every rate key
+ * intact and lets a single object feed both the page and the booking form.
+ * ------------------------------------------------------------------------ */
+
+export const CATEGORIES = [
+  { type: "mpt", title: "Most Popular Tours", short: "Most Popular" },
+  { type: "at", title: "Airport Transfers", short: "Transfers" },
+  { type: "ctp", title: "Combo Tour Packages", short: "Combo Packages" },
+  { type: "abc", title: "Attractions, Beach & City Tours", short: "Attractions" },
+  { type: "cse", title: "Cruise Shore Excursions", short: "Shore Excursions" },
+  { type: "edt", title: "Eating & Dining Tours", short: "Dining" },
+  { type: "egt", title: "Exclusive Golf Tours", short: "Golf" },
+  { type: "ncb", title: "Nightlife, Casino & Bar Tours", short: "Nightlife" },
+  { type: "st", title: "Shopping Tours", short: "Shopping" },
+];
+
+export function getCategoryTitle(type) {
+  return CATEGORIES.find((c) => c.type === type)?.title ?? "Tours & Transfers";
+}
+
+export function getCategoryShort(type) {
+  return CATEGORIES.find((c) => c.type === type)?.short ?? "Tours";
+}
+
+/** Images live in a folder named after the id prefix: mpt-2 → /mpt/mpt-2.webp */
+export function getImage(id) {
+  return `/${id.split("-")[0]}/${id}.webp`;
+}
+
+export function formatPrice(value) {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return "—";
+  return Number.isInteger(n) ? `$${n}` : `$${n.toFixed(2)}`;
+}
+
+/**
+ * Human labels for the rate keys. Tours use short camelCase suffixes
+ * (`priceMobay`); airport transfers use full resort names already spelled out
+ * in the key (`"Sandals Ocho Rios Price"`), which only need the suffix trimmed.
+ */
+const AREA_LABELS = {
+  falmouth: "Falmouth & Duncans (Trelawny)",
+  lucea: "Lucea (Grand Palladium, Hanover)",
+  mobay: "Montego Bay (St. James)",
+  negril: "Negril (Westmoreland)",
+  ochi: "Ocho Rios (St. Ann)",
+  runaway: "Runaway Bay (St. Ann)",
+  ksp: "Kingston, Spanish Town & Portmore",
+  mandeville: "Mandeville (Manchester)",
+  portantonio: "Port Antonio (Portland)",
+  treasurebeach: "Treasure Beach (St. Elizabeth)",
+  breathless: "Breathless, Montego Bay",
+  sunset: "Sunset Beach Resort",
+  secrets: "Secrets St. James & Wild Orchid, Montego Bay",
+};
+
+export function getRateLabel(key) {
+  if (key.startsWith("price")) {
+    const suffix = key.slice(5).toLowerCase();
+    return AREA_LABELS[suffix] ?? "Ask us for this area";
+  }
+  return key.replace(/\s*Price\s*$/i, "").trim();
+}
+
+/** Is this key a bookable rate rather than the headline low/high range? */
+function isRateKey(key) {
+  return (
+    key.toLowerCase().includes("price") &&
+    key !== "priceLowest" &&
+    key !== "priceHighest"
+  );
+}
+
+/** Every bookable rate on a tour, cheapest first, ready for a price table. */
+export function getRates(tour) {
+  return Object.keys(tour)
+    .filter(isRateKey)
+    .map((key) => ({ key, label: getRateLabel(key), amount: Number(tour[key]) }))
+    .filter((r) => Number.isFinite(r.amount))
+    .sort((a, b) => a.amount - b.amount);
+}
+
+/** Roughly how long to set aside, by category. */
+const DURATIONS = {
+  at: "Door to door",
+  mpt: "Half to full day",
+  ctp: "Full day",
+  abc: "Half day",
+  cse: "Timed to your ship",
+  edt: "2–3 hours",
+  egt: "Full day",
+  ncb: "Evening",
+  st: "2–4 hours",
+};
+
+/** Editorial copy per category, with the tour's own name woven in. */
+const DESCRIPTIONS = {
+  at: (t) =>
+    `${t} — booked ahead, priced flat, and entirely private. We track your flight, meet you inside the arrivals hall, handle the luggage and drive you straight to your door in an air-conditioned vehicle. No shared vans, no waiting on other passengers, and no extra stops unless you ask for one.`,
+  mpt: (t) =>
+    `${t} is one of the days guests ask for by name. Your driver collects you from your hotel lobby, villa or cruise pier, gets you there ahead of the crowds and waits while you take your time. Private vehicle, no fixed schedule, and someone who can tell you the story behind what you're looking at.`,
+  ctp: (t) =>
+    `${t} — two or three stops built into one day, which costs far less than booking them apart. We plan the running order so you hit each place at its best time, with the driving, the waiting and the local know-how all included.`,
+  abc: (t) =>
+    `${t}, at your own pace. We handle the driving and the timing so all you have to do is turn up. Your driver waits while you're inside and is there the moment you're ready to move on — and is happy to add a beach or a food stop on the way back.`,
+  cse: (t) =>
+    `${t}, built around your ship's clock. We collect you at the Falmouth or Montego Bay pier, keep an eye on the time for you, and have you back on board comfortably before all-aboard. Ideal for a single port day when every hour counts.`,
+  edt: (t) =>
+    `${t} — the food stop, done properly. We get you there, wait while you eat, and take you back whenever you're finished. No rushing the meal, and no wondering how you'll get home afterwards.`,
+  egt: (t) =>
+    `${t} with transport arranged around your tee time. Clubs go in the back, the driver is on call if the round runs long, and there's an air-conditioned vehicle waiting the moment you walk off the eighteenth.`,
+  ncb: (t) =>
+    `${t}, with a sober driver waiting however late it runs. We drop you at the door, keep your number, and collect you whenever you're ready to call it a night.`,
+  st: (t) =>
+    `${t} — craft markets, duty-free strips and the malls locals actually use. Somebody to carry the bags, somebody who knows what a fair price looks like, and a vehicle waiting so you never have to cut the trip short.`,
+};
+
+/** Category baseline highlights, before any tour-specific extras. */
+const BASE_HIGHLIGHTS = {
+  at: [
+    "Meet & greet inside arrivals",
+    "Flight tracked for delays",
+    "Private, non-shared vehicle",
+    "Luggage handled door to door",
+  ],
+  cse: [
+    "Collected right at the cruise pier",
+    "Timed so you're back before all-aboard",
+    "Private vehicle for your party only",
+    "Air-conditioned throughout",
+  ],
+  ctp: [
+    "Several attractions in one day",
+    "Cheaper than booking separately",
+    "Running order planned to dodge crowds",
+    "Driver waits at every stop",
+  ],
+};
+
+const DEFAULT_HIGHLIGHTS = [
+  "Private, air-conditioned vehicle",
+  "Hotel, villa or cruise-pier pickup",
+  "Local driver-guide who waits for you",
+  "No fixed schedule — you set the pace",
+];
+
+/** Extras triggered by what the tour is actually called. */
+const KEYWORD_HIGHLIGHTS = [
+  [/dunn'?s river/i, "Climb the falls at Dunn's River"],
+  [/blue hole/i, "Swim and jump at the Blue Hole"],
+  [/ys falls/i, "Seven tiers of waterfall at YS"],
+  [/luminous/i, "Glowing water after dark at the Luminous Lagoon"],
+  [/martha brae|raft/i, "Bamboo rafting on a calm river"],
+  [/tubing/i, "River tubing with all the gear provided"],
+  [/rick'?s cafe/i, "Sunset and cliff divers at Rick's Cafe"],
+  [/pelican bar/i, "Boat ride out to Floyd's Pelican Bar"],
+  [/black river|safari/i, "Crocodile safari on the Black River"],
+  [/appleton/i, "Rum tasting at the Appleton Estate"],
+  [/dolphin/i, "Swim with dolphins at Dolphin Cove"],
+  [/rose hall/i, "The great house at Rose Hall"],
+  [/scotchies|jerk/i, "Authentic pit-smoked jerk"],
+  [/doctor'?s cave|beach/i, "Clear water and soft sand"],
+  [/bob marley|nine mile|trench town/i, "Bob Marley's Jamaica, first-hand"],
+  [/atv|buggy|safari tour/i, "Off-road through the bush"],
+  [/horseback/i, "Horseback riding, including into the sea"],
+  [/zip ?line/i, "Ziplining through the canopy"],
+  [/catamaran|snorkel/i, "Snorkelling straight off the boat"],
+  [/shopping|market|duty free/i, "Craft markets and duty-free shopping"],
+  [/devon house/i, "Devon House ice cream in Kingston"],
+];
+
+export function getDuration(tour) {
+  return DURATIONS[tour.category] ?? "Flexible";
+}
+
+export function getDescription(tour) {
+  if (tour.desc && tour.desc.trim()) return tour.desc.trim();
+  const write = DESCRIPTIONS[tour.category] ?? DESCRIPTIONS.abc;
+  return write(tour.title.trim().replace(/\s+/g, " "));
+}
+
+export function getHighlights(tour) {
+  const specific = KEYWORD_HIGHLIGHTS.filter(([re]) => re.test(tour.title)).map(
+    ([, text]) => text
+  );
+  const base = BASE_HIGHLIGHTS[tour.category] ?? DEFAULT_HIGHLIGHTS;
+  return [...new Set([...specific, ...base])].slice(0, 4);
+}
+
+/** A raw record plus everything the UI needs. Rate keys survive the spread. */
+export function enrich(tour) {
+  if (!tour) return null;
+  return {
+    ...tour,
+    image: getImage(tour.id),
+    desc: getDescription(tour),
+    duration: getDuration(tour),
+    highlights: getHighlights(tour),
+    rates: getRates(tour),
+  };
+}
+
+/**
+ * The whole catalogue, de-duplicated by id. A handful of tours are filed under
+ * two categories and so appear twice in the raw array; the grid only ever wants
+ * one card per tour.
+ */
+export function getAllProducts() {
+  const seen = new Set();
+  return products.products
+    .filter((p) => {
+      if (seen.has(p.id)) return false;
+      seen.add(p.id);
+      return true;
+    })
+    .map(enrich);
+}
+
+export function getProductsByCategory(category) {
+  return filterProductByCategory(category).map(enrich);
+}
+
+export function getProductById(id) {
+  return enrich(filterProductById(id));
+}
+
+/** Cheapest-first. Rates are strings in the raw data, so coerce before sorting. */
+export function sortByPrice(list) {
+  return [...list].sort((a, b) => Number(a.priceLowest) - Number(b.priceLowest));
+}
+
+/** Other tours in the same category, for the bottom of a product page. */
+export function getRelatedProducts(tour, limit = 3) {
+  return getProductsByCategory(tour.category)
+    .filter((p) => p.id !== tour.id)
+    .filter((p, i, arr) => arr.findIndex((x) => x.title === p.title) === i)
+    .slice(0, limit);
+}
+
+/** Type-ahead results, enriched so the dropdown can show a thumbnail. */
+export function searchProducts(input) {
+  if (!input || input.trim().length < 2) return [];
+  return searchProduct(input.trim()).map(enrich);
 }

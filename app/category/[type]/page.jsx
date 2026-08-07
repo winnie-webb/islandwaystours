@@ -1,21 +1,102 @@
-import Category from "@/app/components/Category";
-import { filterProductByCategory, products } from "@/app/products/product";
-import React from "react";
-import getTitleFromType from "../getTitleFromType";
+import { notFound } from "next/navigation";
+import PageHeader from "@/app/components/PageHeader";
+import TourGrid from "@/app/components/TourGrid";
+import CtaBand from "@/app/components/CtaBand";
+import {
+  CATEGORIES,
+  getProductsByCategory,
+  getCategoryTitle,
+} from "@/app/products/product";
+
+/** Editorial intro + banner image per category. */
+const CATEGORY_META = {
+  mpt: {
+    image: "/local/hero-1.jpg",
+    blurb:
+      "The routes we run most often, because they're the ones people ask for by name. Waterfalls, jerk pits and the beaches worth the drive.",
+  },
+  at: {
+    image: "/local/hero-6.jpg",
+    blurb:
+      "Flat-rate private transfers from Sangster International to every resort area on the island. We track your flight and meet you inside arrivals.",
+  },
+  ctp: {
+    image: "/local/hero-4.jpg",
+    blurb:
+      "Two or three attractions in one day, priced well below booking them separately. This is what we're known for.",
+  },
+  abc: {
+    image: "/local/hero-8.jpg",
+    blurb:
+      "Waterfalls, caves, beaches and great houses. The single-attraction days, with a driver who waits and a schedule you set.",
+  },
+  cse: {
+    image: "/local/hero-5.jpg",
+    blurb:
+      "Built around your ship's clock. We collect you at the Falmouth or Montego Bay pier and have you back with time to spare.",
+  },
+  edt: {
+    image: "/local/hero-3.jpg",
+    blurb:
+      "Jerk pits, seafood shacks and the restaurants locals actually eat at. Your driver waits while you take your time.",
+  },
+  egt: {
+    image: "/local/hero-2.jpg",
+    blurb:
+      "Transport to Jamaica's championship courses, clubs in the back and a driver on call when the round runs long.",
+  },
+  ncb: {
+    image: "/local/hero-8.jpg",
+    blurb:
+      "Late-night runs to the gaming lounges, waterfront bars and Friday night parties — with a sober driver waiting whenever you're done.",
+  },
+  st: {
+    image: "/local/hero-7.jpg",
+    blurb:
+      "Craft markets, duty-free strips and malls, with someone to hold the bags and tell you what a fair price looks like.",
+  },
+};
+
 export function generateStaticParams() {
-  return products.products.map((product) => ({
-    type: product.category, // Correctly returning the id in an object
-  }));
-}
-function page({ params }) {
-  const { type } = params;
-  return (
-    <Category
-      title={getTitleFromType(type)}
-      data={filterProductByCategory(type)}
-      itemsPerPage={3}
-    ></Category>
-  );
+  return CATEGORIES.map((c) => ({ type: c.type }));
 }
 
-export default page;
+export async function generateMetadata({ params }) {
+  const { type } = await params;
+  const title = getCategoryTitle(type);
+  return {
+    title,
+    description:
+      CATEGORY_META[type]?.blurb ?? `${title} with Island Ways Tours Jamaica.`,
+  };
+}
+
+export default async function CategoryPage({ params }) {
+  const { type } = await params;
+  const tours = getProductsByCategory(type);
+
+  if (tours.length === 0) notFound();
+
+  const meta = CATEGORY_META[type] ?? {};
+
+  return (
+    <>
+      <PageHeader
+        eyebrow={`${tours.length} option${tours.length === 1 ? "" : "s"}`}
+        title={getCategoryTitle(type)}
+        description={meta.blurb}
+        image={meta.image ?? "/local/hero-4.jpg"}
+        breadcrumbs={[
+          { label: "Tours", href: "/tours" },
+          { label: getCategoryTitle(type) },
+        ]}
+      />
+
+      <section className="shell py-14 lg:py-20">
+        <TourGrid tours={tours} showCategoryFilter={false} />
+      </section>
+
+      <CtaBand />
+    </>
+  );
+}

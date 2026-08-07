@@ -1,15 +1,16 @@
 "use client";
-import React, { useRef, useState, useEffect, useCallback } from "react";
-import Pickup from "./Pickup";
+import React, { useRef, useState } from "react";
 import NumberofPersons from "./NumberofPersons";
+import BookingNotes from "./BookingNotes";
 import emailjs from "@emailjs/browser";
 import BookingSuccessMsg from "./BookingSuccessMsg";
 import { useRouter } from "next/navigation";
+import { FaLock } from "react-icons/fa";
+import { getRateLabel } from "@/app/products/product";
 
 export const TransferBookingForm = ({ tour }) => {
   const form = useRef();
   const placeOfStay = useRef();
-  const [totalPrice, setTotalPrice] = useState(0);
   const [adults, setAdults] = useState(0);
   const [kids, setKids] = useState(0);
   const [isMsgSent, setIsMsgSent] = useState(false);
@@ -37,18 +38,12 @@ export const TransferBookingForm = ({ tour }) => {
   );
   const router = useRouter();
 
-  const calculateTotalPrice = useCallback(() => {
-    const total = adults * pricePerPerson;
-    if (adults <= 4 && adults !== 0) {
-      setTotalPrice(pricePerPerson * 4);
-    } else {
-      setTotalPrice(total.toFixed(2));
-    }
-  }, [adults, pricePerPerson]);
-
-  useEffect(() => {
-    calculateTotalPrice();
-  }, [adults, calculateTotalPrice, pricePerPerson]);
+  // Derived, not stored: 1–4 guests pay the four-person charter minimum, five
+  // or more pay per head. Same arithmetic as before, one render instead of two.
+  const totalPrice =
+    adults <= 4 && adults !== 0
+      ? pricePerPerson * 4
+      : (adults * pricePerPerson).toFixed(2);
 
   const handleAdultsChange = (value) => {
     setAdults(value);
@@ -89,12 +84,7 @@ export const TransferBookingForm = ({ tour }) => {
     };
 
     emailjs
-      .send(
-        "service_jkakbwm",
-        "template_c9x6dub",
-        formData,
-        "RR28X9JtFyIaAYPWA"
-      )
+      .send("service_jkakbwm", "template_c9x6dub", formData, "RR28X9JtFyIaAYPWA")
       .then(
         () => {
           setIsMsgSent(true);
@@ -116,324 +106,300 @@ export const TransferBookingForm = ({ tour }) => {
     <form
       ref={form}
       id="booking-form"
-      className="max-w-3xl mx-auto bg-white p-6 shadow-lg rounded-lg mt-8"
+      className="overflow-hidden rounded-2xl border border-ink/[0.07] bg-white shadow-lift"
       onSubmit={sendEmail}
     >
-      <div className="bg-gray-100 p-4 rounded-md mb-6 text-sm text-gray-800">
-        <p className="font-semibold text-gray-900">
-          Important Booking Information:
+      <div className="border-b border-ink/[0.07] bg-sand px-6 py-5">
+        <h2 className="font-display text-xl font-semibold text-ink">
+          Book this transfer
+        </h2>
+        <p className="mt-1 text-xs text-ink/55">
+          Give us your flight details — we track it and adjust for delays.
         </p>
-        <ul className="list-disc ml-5 mt-3 space-y-2">
-          <li>
-            <strong>Chartered/Private Taxi:</strong> Minimum booking cost for
-            1-4 persons is four times the per-person rate.
-          </li>
-          <li>
-            <strong>One Tour/Transfer Per Booking:</strong> Please book one tour
-            or transfer at a time as each has a unique start time and date.
-          </li>
-          <li>
-            <strong>Hotel Pickup/Drop-off:</strong> For guests staying at a
-            hotel or resort, the pickup and drop-off point is the main lobby.
-          </li>
-          <li>
-            <strong>Children Under 5:</strong> Travel free with an accompanying
-            adult.
-          </li>
-        </ul>
       </div>
-      <h2 className="text-3xl font-bold text-center mb-6 text-orange-600">
-        Booking Form
-      </h2>
 
-      {/* Transfer Type */}
-      <div className="mb-2">
-        <label className="block text-gray-700 font-semibold mb-2">
-          Transfer Type:
-        </label>
-        <select
-          name="transferType"
-          ref={transferTypeRef}
-          onChange={(e) => {
-            handleTransferDetailsChange(e.target.name, e.target.value);
-            const placeOfStayValue = placeOfStay.current.value;
-            const currentPrice = parseInt(tour[placeOfStayValue], 10);
-            if (!isNaN(currentPrice)) {
-              if (e.target.value === "PickUpAndDropOff") {
-                setPricePerPerson(currentPrice * 2);
-              } else {
-                setPricePerPerson(currentPrice);
+      <div className="space-y-5 p-6">
+        <BookingNotes />
+
+        {/* Transfer Type */}
+        <div>
+          <label htmlFor="transfer-type" className="label">
+            Transfer type
+          </label>
+          <select
+            id="transfer-type"
+            name="transferType"
+            ref={transferTypeRef}
+            onChange={(e) => {
+              handleTransferDetailsChange(e.target.name, e.target.value);
+              const placeOfStayValue = placeOfStay.current.value;
+              const currentPrice = parseInt(tour[placeOfStayValue], 10);
+              if (!isNaN(currentPrice)) {
+                if (e.target.value === "PickUpAndDropOff") {
+                  setPricePerPerson(currentPrice * 2);
+                } else {
+                  setPricePerPerson(currentPrice);
+                }
               }
-            }
-          }}
-          className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-orange-300 focus:outline-none"
-        >
-          <option value="">Choose Transfer Type</option>
-          <option value="DropOff">
-            Drop off {"( Place of Stay to Airport)"}
-          </option>
-          <option value="PickUp">Pick Up {"(Airport to Place of Stay)"}</option>
-          <option value="PickUpAndDropOff">
-            Pickup & Drop off {"(Round Trip)"}
-          </option>
-        </select>
-      </div>
+            }}
+            className="field"
+          >
+            <option value="">Choose transfer type</option>
+            <option value="DropOff">Drop off (place of stay → airport)</option>
+            <option value="PickUp">Pick up (airport → place of stay)</option>
+            <option value="PickUpAndDropOff">Pickup &amp; drop off (round trip)</option>
+          </select>
+        </div>
 
-      {/* Place Of Stay */}
-      <div className="mb-2">
-        <label className="block text-gray-700 font-semibold mb-2">
-          Pick Place Of Stay:
-        </label>
-        <select
-          name="placeOfStay"
-          ref={placeOfStay}
-          onChange={(e) => {
-            handleTransferDetailsChange(e.target.name, e.target.value);
-            const currentPrice = parseInt(tour[e.target.value], 10);
-            if (!isNaN(currentPrice)) {
-              if (transferTypeRef.current.value === "PickUpAndDropOff") {
-                setPricePerPerson(currentPrice * 2);
-              } else {
-                setPricePerPerson(currentPrice);
+        {/* Place Of Stay */}
+        <div>
+          <label htmlFor="place-of-stay" className="label">
+            Place of stay
+          </label>
+          <select
+            id="place-of-stay"
+            name="placeOfStay"
+            ref={placeOfStay}
+            onChange={(e) => {
+              handleTransferDetailsChange(e.target.name, e.target.value);
+              const currentPrice = parseInt(tour[e.target.value], 10);
+              if (!isNaN(currentPrice)) {
+                if (transferTypeRef.current.value === "PickUpAndDropOff") {
+                  setPricePerPerson(currentPrice * 2);
+                } else {
+                  setPricePerPerson(currentPrice);
+                }
               }
+            }}
+            className="field"
+          >
+            <option value="">Choose place of stay</option>
+            {tourPlaceKeys.map((option) => (
+              <option key={option} value={option}>
+                {getRateLabel(option)}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="rounded-xl border border-ink/10 p-4">
+          <p className="label mb-3">Arrival</p>
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label htmlFor="arrival-date" className="label">
+                  Date
+                </label>
+                <input
+                  type="date"
+                  id="arrival-date"
+                  name="arrivalDate"
+                  onChange={(e) =>
+                    handleTransferDetailsChange(e.target.name, e.target.value)
+                  }
+                  className="field"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="arrival-time" className="label">
+                  Landing time
+                </label>
+                <input
+                  type="time"
+                  id="arrival-time"
+                  name="arrivalTime"
+                  onChange={(e) =>
+                    handleTransferDetailsChange(e.target.name, e.target.value)
+                  }
+                  className="field"
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="airlines-name" className="label">
+                Airline &amp; flight number
+              </label>
+              <input
+                type="text"
+                id="airlines-name"
+                name="airlinesName"
+                placeholder="NAME & XYZ1234"
+                onChange={(e) =>
+                  handleTransferDetailsChange(e.target.name, e.target.value)
+                }
+                className="field"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-ink/10 p-4">
+          <p className="label mb-3">Departure</p>
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label htmlFor="departure-date" className="label">
+                  Date
+                </label>
+                <input
+                  type="date"
+                  id="departure-date"
+                  name="departureDate"
+                  onChange={(e) =>
+                    handleTransferDetailsChange(e.target.name, e.target.value)
+                  }
+                  className="field"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="departure-time" className="label">
+                  Flight time
+                </label>
+                <input
+                  type="time"
+                  id="departure-time"
+                  name="departureTime"
+                  onChange={(e) =>
+                    handleTransferDetailsChange(e.target.name, e.target.value)
+                  }
+                  className="field"
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="pickup-time" className="label">
+                Pickup time from your resort / villa
+              </label>
+              <input
+                type="time"
+                id="pickup-time"
+                name="pickupTime"
+                onChange={(e) =>
+                  handleTransferDetailsChange(e.target.name, e.target.value)
+                }
+                className="field"
+              />
+            </div>
+            <div>
+              <label htmlFor="departure-airlines" className="label">
+                Airline &amp; flight number
+              </label>
+              <input
+                type="text"
+                id="departure-airlines"
+                name="departureAirlines"
+                placeholder="NAME & XYZ1234"
+                onChange={(e) =>
+                  handleTransferDetailsChange(e.target.name, e.target.value)
+                }
+                className="field"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Pickup/Drop-off Location */}
+        <div>
+          <label htmlFor="pickup-dropoff" className="label">
+            Pickup / drop-off address
+          </label>
+          <input
+            type="text"
+            id="pickup-dropoff"
+            name="pickupDropoff"
+            placeholder="Resort name, or villa/Airbnb address"
+            onChange={(e) =>
+              handleTransferDetailsChange(e.target.name, e.target.value)
             }
-          }}
-          className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-orange-300 focus:outline-none"
-        >
-          <option value="">Choose Place of Stay</option>
-          {tourPlaceKeys.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-      </div>
+            className="field"
+          />
+        </div>
 
-      {/* Arrival Date */}
-      <div className="mb-2">
-        <label
-          htmlFor="arrival-date"
-          className="block text-gray-700 font-semibold mb-2"
-        >
-          Date of Arrival:
-        </label>
-        <input
-          type="date"
-          id="arrival-date"
-          name="arrivalDate"
-          onChange={(e) =>
-            handleTransferDetailsChange(e.target.name, e.target.value)
-          }
-          className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-orange-300 focus:outline-none"
-          required
-        />
-      </div>
+        <NumberofPersons
+          onAdultsChange={handleAdultsChange}
+          onKidsChange={handleKidsChange}
+        ></NumberofPersons>
 
-      {/* Airlines Arrival Time */}
-      <div className="mb-2">
-        <label
-          htmlFor="arrival-time"
-          className="block text-gray-700 font-semibold mb-2"
-        >
-          Airlines Arrival Time:
-        </label>
-        <input
-          type="time"
-          id="arrival-time"
-          name="arrivalTime"
-          placeholder="hh:mm AM/PM format"
-          onChange={(e) =>
-            handleTransferDetailsChange(e.target.name, e.target.value)
-          }
-          className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-orange-300 focus:outline-none"
-        />
-      </div>
+        <div>
+          <label htmlFor="email" className="label">
+            Email address
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="you@example.com"
+            className="field"
+          />
+        </div>
 
-      {/* Arrival Airlines Name & Number */}
-      <div className="mb-2">
-        <label
-          htmlFor="airlines-name"
-          className="block text-gray-700 font-semibold mb-2"
-        >
-          Arrival Airlines Name & Number:
-        </label>
-        <input
-          type="text"
-          id="airlines-name"
-          name="airlinesName"
-          placeholder="NAME & XYZ1234"
-          onChange={(e) =>
-            handleTransferDetailsChange(e.target.name, e.target.value)
-          }
-          className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-orange-300 focus:outline-none"
-        />
-      </div>
+        <div>
+          <label htmlFor="phone_number" className="label">
+            Phone number
+          </label>
+          <input
+            type="text"
+            id="phone_number"
+            name="phone_number"
+            required
+            placeholder="+1 555 000 0000"
+            className="field"
+          />
+        </div>
 
-      {/* Departure Date */}
-      <div className="mb-2">
         <label
-          htmlFor="departure-date"
-          className="block text-gray-700 font-semibold mb-2"
+          htmlFor="pay-online"
+          className="flex cursor-pointer items-start gap-3 rounded-xl border border-ink/10 bg-sand p-4 transition hover:border-palm-200"
         >
-          Date Of Departure:
-        </label>
-        <input
-          type="date"
-          id="departure-date"
-          name="departureDate"
-          onChange={(e) =>
-            handleTransferDetailsChange(e.target.name, e.target.value)
-          }
-          className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-orange-300 focus:outline-none"
-          required
-        />
-      </div>
-
-      {/* Departure Airlines Time */}
-      <div className="mb-2">
-        <label
-          htmlFor="departure-time"
-          className="block text-gray-700 font-semibold mb-2"
-        >
-          Departure Airlines Time:
-        </label>
-        <input
-          type="time"
-          id="departure-time"
-          name="departureTime"
-          placeholder="hh:mm AM/PM format"
-          onChange={(e) =>
-            handleTransferDetailsChange(e.target.name, e.target.value)
-          }
-          className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-orange-300 focus:outline-none"
-        />
-      </div>
-
-      {/* Pickup Time */}
-      <div className="mb-2">
-        <label
-          htmlFor="pickup-time"
-          className="block text-gray-700 font-semibold mb-2"
-        >
-          Pickup Time from Resort/Villa/AirBnB/Home:
-        </label>
-        <input
-          type="time"
-          id="pickup-time"
-          name="pickupTime"
-          onChange={(e) =>
-            handleTransferDetailsChange(e.target.name, e.target.value)
-          }
-          className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-orange-300 focus:outline-none"
-        />
-      </div>
-
-      {/* Departure Airlines Name & Number */}
-      <div className="mb-2">
-        <label
-          htmlFor="departure-airlines"
-          className="block text-gray-700 font-semibold mb-2"
-        >
-          Departure Airlines Name & Number:
-        </label>
-        <input
-          type="text"
-          id="departure-airlines"
-          name="departureAirlines"
-          placeholder="NAME & XYZ1234"
-          onChange={(e) =>
-            handleTransferDetailsChange(e.target.name, e.target.value)
-          }
-          className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-orange-300 focus:outline-none"
-        />
-      </div>
-
-      {/* Pickup/Drop-off Location */}
-      <div className="mb-2">
-        <label
-          htmlFor="pickup-dropoff"
-          className="block text-gray-700 font-semibold mb-2"
-        >
-          Pickup / Drop-off Location:
-        </label>
-        <input
-          type="text"
-          id="pickup-dropoff"
-          name="pickupDropoff"
-          onChange={(e) =>
-            handleTransferDetailsChange(e.target.name, e.target.value)
-          }
-          className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-orange-300 focus:outline-none"
-        />
-      </div>
-      <NumberofPersons
-        onAdultsChange={handleAdultsChange}
-        onKidsChange={handleKidsChange}
-      ></NumberofPersons>
-      <div className="mb-2">
-        <label
-          htmlFor="email"
-          className="block text-gray-700 font-semibold mb-2"
-        >
-          Email Address:
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          required
-          className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-orange-300 focus:outline-none"
-        />
-      </div>
-      <div className="mb-2">
-        <label
-          htmlFor="phone_number"
-          className="block text-gray-700 font-semibold mb-2"
-        >
-          Phone Number:
-        </label>
-        <input
-          type="text"
-          id="phone_number"
-          name="phone_number"
-          required
-          className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-orange-300 focus:outline-none"
-        />
-      </div>
-      <div className="flex items-center mb-2">
-        <input
-          type="checkbox"
-          id="pay-online"
-          name="pay-online"
-          className="mr-2"
-          onChange={(e) => {
-            setIsPayingOnline(e.target.checked);
-          }}
-        />
-
-        <label htmlFor="pay-online" className="text-gray-700 font-semibold">
-          Do you want to pay online?
-        </label>
-      </div>
-      <p className="text-gray-600 text-sm mb-2">
-        (If you want to pay when you arrive, please leave the box unchecked)
-      </p>
-      <div className="text-lg mb-2">
-        <p>
-          Total Price: $
-          <span id="total-price" className="font-semibold">
-            {totalPrice}{" "}
+          <input
+            type="checkbox"
+            id="pay-online"
+            name="pay-online"
+            className="mt-0.5 h-4 w-4 shrink-0 accent-palm-600"
+            onChange={(e) => {
+              setIsPayingOnline(e.target.checked);
+            }}
+          />
+          <span>
+            <span className="block text-sm font-semibold text-ink">
+              I&apos;d like to pay online
+            </span>
+            <span className="mt-0.5 block text-xs leading-relaxed text-ink/55">
+              Leave this unchecked to pay your driver in cash on the day.
+            </span>
           </span>
-        </p>
-      </div>
+        </label>
 
-      <div className="text-center">
-        <button
-          type="submit"
-          className="bg-orange-600 text-white font-semibold py-2 px-4 rounded hover:bg-orange-500"
-        >
+        <div className="flex items-end justify-between rounded-xl bg-ink px-5 py-4">
+          <div>
+            <span className="block text-[0.68rem] font-medium uppercase tracking-wider text-white/50">
+              Total
+            </span>
+            <span
+              id="total-price"
+              className="font-display text-3xl font-semibold text-gold-400"
+            >
+              ${totalPrice}
+            </span>
+          </div>
+          <span className="pb-1 text-right text-[0.7rem] leading-tight text-white/45">
+            USD
+            <br />
+            {pricePerPerson > 0 ? "min. 4 persons" : "pick a place of stay"}
+          </span>
+        </div>
+
+        <button type="submit" className="btn-primary w-full">
           Confirm Booking
         </button>
+
+        <p className="flex items-center justify-center gap-1.5 text-center text-[0.7rem] text-ink/45">
+          <FaLock className="text-[0.6rem]" />
+          Your details go straight to our dispatch inbox.
+        </p>
       </div>
     </form>
   ) : (

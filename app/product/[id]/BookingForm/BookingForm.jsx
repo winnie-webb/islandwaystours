@@ -4,11 +4,13 @@ import { TourBookingForm } from "./TourBookingForm";
 import { TransferBookingForm } from "./TransferBookingForm";
 
 function BookingForm({ tour }) {
-  const isTransfer = tour.category !== "at";
-  return isTransfer ? (
-    <TourBookingForm tour={tour} />
-  ) : (
+  // Airport transfers collect flight details and a place of stay; everything
+  // else uses the simpler pickup-area form.
+  const isAirportTransfer = tour.category === "at";
+  return isAirportTransfer ? (
     <TransferBookingForm tour={tour} />
+  ) : (
+    <TourBookingForm tour={tour} />
   );
 }
 

@@ -1,31 +1,28 @@
 "use client";
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React, { useRef, useState } from "react";
 import Pickup from "./Pickup";
 import NumberofPersons from "./NumberofPersons";
+import BookingNotes from "./BookingNotes";
 import emailjs from "@emailjs/browser";
 import BookingSuccessMsg from "./BookingSuccessMsg";
 import { useRouter } from "next/navigation";
+import { FaLock } from "react-icons/fa";
+
 export const TourBookingForm = ({ tour }) => {
   const form = useRef();
-  const [totalPrice, setTotalPrice] = useState(0);
   const [adults, setAdults] = useState(0);
   const [kids, setKids] = useState(0);
   const [isMsgSent, setIsMsgSent] = useState(false);
   const [isPayingOnline, setIsPayingOnline] = useState(false);
   const [pricePerPerson, setPricePerPerson] = useState(0);
   const router = useRouter();
-  const calculateTotalPrice = useCallback(() => {
-    const total = adults * pricePerPerson;
-    if (adults <= 4 && adults !== 0) {
-      setTotalPrice(pricePerPerson * 4);
-    } else {
-      setTotalPrice(total.toFixed(2));
-    }
-  }, [adults, pricePerPerson]);
 
-  useEffect(() => {
-    calculateTotalPrice();
-  }, [adults, calculateTotalPrice, pricePerPerson]);
+  // Derived, not stored: 1–4 guests pay the four-person charter minimum, five
+  // or more pay per head. Same arithmetic as before, one render instead of two.
+  const totalPrice =
+    adults <= 4 && adults !== 0
+      ? pricePerPerson * 4
+      : (adults * pricePerPerson).toFixed(2);
 
   const handleAdultsChange = (value) => {
     setAdults(value);
@@ -35,7 +32,7 @@ export const TourBookingForm = ({ tour }) => {
     setKids(value);
   };
 
-  const sendEmail = (e) => {
+  const sendEmail = () => {
     const formData = {
       tour_name: tour.title,
       email: form.current.email.value,
@@ -53,12 +50,7 @@ export const TourBookingForm = ({ tour }) => {
     };
 
     emailjs
-      .send(
-        "service_jkakbwm",
-        "template_ibknzsh",
-        formData,
-        "RR28X9JtFyIaAYPWA"
-      )
+      .send("service_jkakbwm", "template_ibknzsh", formData, "RR28X9JtFyIaAYPWA")
       .then(
         () => {
           setIsMsgSent(true);
@@ -76,7 +68,7 @@ export const TourBookingForm = ({ tour }) => {
     <form
       ref={form}
       id="booking-form"
-      className="max-w-3xl mx-auto bg-white p-6 shadow-lg rounded-lg mt-8"
+      className="overflow-hidden rounded-2xl border border-ink/[0.07] bg-white shadow-lift"
       onSubmit={(e) => {
         e.preventDefault();
         sendEmail();
@@ -86,102 +78,103 @@ export const TourBookingForm = ({ tour }) => {
         setIsMsgSent(!isMsgSent);
       }}
     >
-      <div className="bg-gray-100 p-4 rounded-md mb-6 text-sm text-gray-800">
-        <p className="font-semibold text-gray-900">
-          Important Booking Information:
+      <div className="border-b border-ink/[0.07] bg-sand px-6 py-5">
+        <h2 className="font-display text-xl font-semibold text-ink">
+          Book this tour
+        </h2>
+        <p className="mt-1 text-xs text-ink/55">
+          No payment needed now unless you want to settle online.
         </p>
-        <ul className="list-disc ml-5 mt-3 space-y-2">
-          <li>
-            <strong>Chartered/Private Taxi:</strong> Minimum booking cost for
-            1-4 persons is four times the per-person rate.
-          </li>
-          <li>
-            <strong>One Tour/Transfer Per Booking:</strong> Please book one tour
-            or transfer at a time as each has a unique start time and date.
-          </li>
-          <li>
-            <strong>Hotel Pickup/Drop-off:</strong> For guests staying at a
-            hotel or resort, the pickup and drop-off point is the main lobby.
-          </li>
-          <li>
-            <strong>Children Under 5:</strong> Travel free with an accompanying
-            adult.
-          </li>
-        </ul>
       </div>
-      <h2 className="text-3xl font-bold text-center mb-6 text-orange-600">
-        Booking Form
-      </h2>
 
-      <Pickup tour={tour} setPricePerPerson={setPricePerPerson} />
-      <NumberofPersons
-        onAdultsChange={handleAdultsChange}
-        onKidsChange={handleKidsChange}
-      />
+      <div className="space-y-5 p-6">
+        <BookingNotes />
 
-      <div className="mb-4">
+        <Pickup tour={tour} setPricePerPerson={setPricePerPerson} />
+        <NumberofPersons
+          onAdultsChange={handleAdultsChange}
+          onKidsChange={handleKidsChange}
+        />
+
+        <div>
+          <label htmlFor="email" className="label">
+            Email address
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="you@example.com"
+            className="field"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="phone_number" className="label">
+            Phone number
+          </label>
+          <input
+            type="text"
+            id="phone_number"
+            name="phone_number"
+            required
+            placeholder="+1 555 000 0000"
+            className="field"
+          />
+        </div>
+
         <label
-          htmlFor="email"
-          className="block text-gray-700 font-semibold mb-2"
+          htmlFor="pay-online"
+          className="flex cursor-pointer items-start gap-3 rounded-xl border border-ink/10 bg-sand p-4 transition hover:border-palm-200"
         >
-          Email Address:
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          required
-          className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-orange-300 focus:outline-none"
-        />
-      </div>
-      <div className="mb-2">
-        <label
-          htmlFor="phone_number"
-          className="block text-gray-700 font-semibold mb-2"
-        >
-          Phone Number:
-        </label>
-        <input
-          type="text"
-          id="phone_number"
-          name="phone_number"
-          required
-          className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-orange-300 focus:outline-none"
-        />
-      </div>
-      <div className="flex items-center mb-4">
-        <input
-          type="checkbox"
-          id="pay-online"
-          name="pay-online"
-          className="mr-2"
-          onChange={(e) => {
-            setIsPayingOnline(e.target.checked);
-          }}
-        />
-        <label htmlFor="pay-online" className="text-gray-700 font-semibold">
-          Do you want to pay online?
-        </label>
-      </div>
-      <p className="text-gray-600 text-sm mb-4">
-        (If you want to pay when you arrive, please leave the box unchecked)
-      </p>
-      <div className="text-lg mb-4">
-        <p>
-          Total Price: $
-          <span id="total-price" className="font-semibold">
-            {totalPrice}{" "}
+          <input
+            type="checkbox"
+            id="pay-online"
+            name="pay-online"
+            className="mt-0.5 h-4 w-4 shrink-0 accent-palm-600"
+            onChange={(e) => {
+              setIsPayingOnline(e.target.checked);
+            }}
+          />
+          <span>
+            <span className="block text-sm font-semibold text-ink">
+              I&apos;d like to pay online
+            </span>
+            <span className="mt-0.5 block text-xs leading-relaxed text-ink/55">
+              Leave this unchecked to pay your driver in cash on the day.
+            </span>
           </span>
+        </label>
+
+        <div className="flex items-end justify-between rounded-xl bg-ink px-5 py-4">
+          <div>
+            <span className="block text-[0.68rem] font-medium uppercase tracking-wider text-white/50">
+              Total
+            </span>
+            <span
+              id="total-price"
+              className="font-display text-3xl font-semibold text-gold-400"
+            >
+              ${totalPrice}
+            </span>
+          </div>
+          <span className="pb-1 text-right text-[0.7rem] leading-tight text-white/45">
+            USD
+            <br />
+            {pricePerPerson > 0 ? "min. 4 persons" : "pick an area"}
+          </span>
+        </div>
+
+        <button type="submit" id="book-button" className="btn-primary w-full">
+          Book Now
+        </button>
+
+        <p className="flex items-center justify-center gap-1.5 text-center text-[0.7rem] text-ink/45">
+          <FaLock className="text-[0.6rem]" />
+          Your details go straight to our dispatch inbox.
         </p>
       </div>
-
-      <button
-        type="submit"
-        id="book-button"
-        className="w-full bg-orange-600 text-white py-3 rounded-lg font-bold hover:bg-orange-700 transition duration-200"
-      >
-        Book Now
-      </button>
     </form>
   ) : (
     <BookingSuccessMsg isMsgSent={isMsgSent}></BookingSuccessMsg>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import { FaCheckCircle } from "react-icons/fa";
 
 const PayPalButton = ({ amount }) => {
   const [paymentSuccess, setPaymentSuccess] = useState(false); // State to track payment status
@@ -8,20 +9,22 @@ const PayPalButton = ({ amount }) => {
   return (
     <>
       {paymentSuccess ? (
-        <div className="flex flex-col items-center justify-center p-6 bg-orange-100 rounded-lg shadow-md">
-          <h2 className="text-2xl font-bold text-orange-600">
-            Thank you for your purchase, {payerName}! Your booking was placed
-            and your expenses for traveling was covered
+        <div className="rounded-xl bg-palm-50 p-6 text-center">
+          <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-white text-palm-600 shadow-sm">
+            <FaCheckCircle className="text-xl" />
+          </span>
+          <h2 className="mt-4 font-display text-xl font-semibold text-ink">
+            Payment received{payerName ? `, ${payerName}` : ""} — thank you.
           </h2>
-          <p className="mt-4 text-lg text-orange-700">
-            Your transaction was successful.
+          <p className="mt-2 text-sm leading-relaxed text-ink/65">
+            Your transaction was successful and your booking is covered.
+            We&apos;ll be in touch with your driver and pickup details.
           </p>
-          {/* You can add more information here, like order details or links to downloads */}
         </div>
       ) : (
         <div className="flex flex-col items-center">
           <PayPalButtons
-            className="rounded-md text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-50"
+            className="w-full"
             createOrder={(data, actions) => {
               return actions.order.create({
                 purchase_units: [

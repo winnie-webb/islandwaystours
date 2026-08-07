@@ -1673,22 +1673,26 @@ const DEFAULT_HIGHLIGHTS = [
   "No fixed schedule — you set the pace",
 ];
 
-/** Extras triggered by what the tour is actually called. */
+/**
+ * Extras triggered by what the tour is actually called. Titles in the
+ * catalogue mix straight and curly apostrophes ("Dunn's" vs "Dunn’s"), so any
+ * pattern spanning one has to accept both forms.
+ */
 const KEYWORD_HIGHLIGHTS = [
-  [/dunn'?s river/i, "Climb the falls at Dunn's River"],
+  [/dunn['’]?s river/i, "Climb the falls at Dunn's River"],
   [/blue hole/i, "Swim and jump at the Blue Hole"],
   [/ys falls/i, "Seven tiers of waterfall at YS"],
   [/luminous/i, "Glowing water after dark at the Luminous Lagoon"],
   [/martha brae|raft/i, "Bamboo rafting on a calm river"],
   [/tubing/i, "River tubing with all the gear provided"],
-  [/rick'?s cafe/i, "Sunset and cliff divers at Rick's Cafe"],
+  [/rick['’]?s cafe/i, "Sunset and cliff divers at Rick's Cafe"],
   [/pelican bar/i, "Boat ride out to Floyd's Pelican Bar"],
   [/black river|safari/i, "Crocodile safari on the Black River"],
   [/appleton/i, "Rum tasting at the Appleton Estate"],
   [/dolphin/i, "Swim with dolphins at Dolphin Cove"],
   [/rose hall/i, "The great house at Rose Hall"],
   [/scotchies|jerk/i, "Authentic pit-smoked jerk"],
-  [/doctor'?s cave|beach/i, "Clear water and soft sand"],
+  [/doctor['’]?s cave|beach/i, "Clear water and soft sand"],
   [/bob marley|nine mile|trench town/i, "Bob Marley's Jamaica, first-hand"],
   [/atv|buggy|safari tour/i, "Off-road through the bush"],
   [/horseback/i, "Horseback riding, including into the sea"],
